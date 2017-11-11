@@ -6837,3 +6837,24 @@ td.visible-print {
     font-size: medium;
     font-weight: 600;
 }
+
+.cartItemNum {
+    width: 20px;
+}
+.cartItemDesc {
+    width: 300px;
+    text-wrap: normal;
+}
+.cartItemPrice {
+    width: 100px;
+}
+.cartItemImg {
+    width: 100px;
+    height: 100px;
+}
+.cartItemQty {
+    width: 80px;
+}
+.cartItemUpdate {
+    width: 80px;
+}

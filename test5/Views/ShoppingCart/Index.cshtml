@@ -1,0 +1,35 @@
+﻿@using test5.Models.ShoppingCart;
+
+@{
+    ViewBag.Title = "New Products";
+}
+<br />
+<h1>Shopping Cart</h1>
+@using (Html.BeginForm("View", "ShoppingCart"))
+{
+    <div class="form-group">
+        <label class="cartItemNum">Item #</label>
+        <label class="cartItemDesc">Descrption</label>
+        <label class="cartItemImg">Image</label>
+        <label class="cartItemPrice">Price</label>
+        <label class="cartItemQty">Quantity</label>
+        <label class="cartItemUpdate">Update</label>
+    </div>
+    var  count = 1;
+    foreach ( var item in Model)
+    {
+        <div class="form-group">
+            <label class="cartItemNum">@count</label>
+            <label class="cartItemDesc">@item.description</label>
+            <img class="cartItemImg" src="@item.image"></img>
+            <label class="cartItemPrice">@item.price USD</label>
+            <textarea class="cartItemQty">3</textarea>
+            <button class="cartItemUpdate">Update</button>
+        </div>
+        ++count;
+    }
+    <br />
+    <div>
+        <button>Checkout</button>
+    </div>
+}
