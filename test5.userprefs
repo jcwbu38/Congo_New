@@ -1,19 +1,13 @@
 ﻿<Properties StartupConfiguration="{8BDD7557-397F-4A1C-A830-FE06B9A4E043}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="test5/Startup.cs">
     <Files>
-      <File FileName="test5/Startup.cs" Line="28" Column="50" />
+      <File FileName="test5/appsettings.json" Line="12" Column="1" />
+      <File FileName="test5/Startup.cs" Line="32" Column="55" />
+      <File FileName="test5/test5.csproj" Line="10" Column="81" />
+      <File FileName="test5/Migrations/20171111185140_InitialCreate.cs" Line="1" Column="1" />
+      <File FileName="test5/Migrations/20171111185140_InitialCreate.Designer.cs" Line="1" Column="1" />
+      <File FileName="test5/Migrations/InventoryContextModelSnapshot.cs" Line="23" Column="42" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="test5" expanded="True">
-            <Node name="test5" expanded="True">
-              <Node name="Startup.cs" selected="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
