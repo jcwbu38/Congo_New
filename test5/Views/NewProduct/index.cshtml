@@ -6,6 +6,7 @@
 <!-- Display general product info here... -->
 <div class="product">
     <br />
+    <h1> New Products</h1>
     <li>
         
         @foreach (var product in Model)
@@ -14,8 +15,7 @@
                 {
                     <ul>
                         <img src="@product.image" />
-                        <p class="prod_desc">@product.description</p>
-                        <strong> NEW! </strong>
+                        <p class="prod_desc"><strong>NEW! </strong>@product.description</p>
                         <p class="pricing">@product.price</p>
                     </ul>
                 }

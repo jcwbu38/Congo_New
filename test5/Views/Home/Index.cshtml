@@ -6,14 +6,18 @@
 <!-- Display general product info here... -->
 <div class="product">
     <br />
+    <h1> All Products</h1>
     <li>
         @foreach (var product in Model)
         {
-            <ul><img src="@product.image"/><p class="prod_desc">@product.description</p>
-            @if (product.EntryDate.Year == DateTime.Today.Year )
-            {
-                <strong > NEW! </strong>
-            }
+            <ul><img src="@product.image"/>
+                <p class="prod_desc">
+                    @if (product.EntryDate.Year == DateTime.Today.Year)
+                    {
+                        <strong>NEW! </strong>
+                    }
+                    @product.description
+                </p>
             <p class="pricing">
                 @if (!String.IsNullOrEmpty(product.discountPrice))
                 {

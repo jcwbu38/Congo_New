@@ -6829,6 +6829,7 @@ td.visible-print {
 .prod_desc {
     padding: 0em 1.0em 0em 0em;
     max-width: 260px;
+    min-height: 5em;
 }
 
 .pricing {
