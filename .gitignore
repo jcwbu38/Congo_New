@@ -319,6 +319,10 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
+Debug/
+*.cache
+
+
 # OpenCover UI analysis results
 OpenCover/
 © 2017 GitHub, Inc.
