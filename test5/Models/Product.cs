@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Congo.Models
+namespace test5.Models
 {
     public class Product
     {

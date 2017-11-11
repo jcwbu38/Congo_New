@@ -24,8 +24,8 @@ namespace test5
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            //services.AddDbContext<MvcMovieContext>(options =>
-            //options.UseSqlite("Data Source=MvcMovie.db"));
+            services.AddDbContext<InventoryContext>(options =>
+            options.UseSqlite("Data Source=Inventory.db"));
 
         }
 
