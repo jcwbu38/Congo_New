@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using test5.Models;
 
-namespace Congo.Controllers
+namespace test5.Controllers
 {
     public class InventoryController : Controller
     {
@@ -53,7 +53,7 @@ namespace Congo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,itemID,itemName,dateReceived,locationID,sellerName")] Inventory inventory)
+        public async Task<IActionResult> Create([Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice")] Inventory inventory)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Congo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,itemID,itemName,dateReceived,locationID,sellerName")] Inventory inventory)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice")] Inventory inventory)
         {
             if (id != inventory.ID)
             {

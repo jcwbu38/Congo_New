@@ -38,6 +38,31 @@
                 <span asp-validation-for="sellerName" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="image" class="control-label"></label>
+                <input asp-for="image" class="form-control" />
+                <span asp-validation-for="image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="description" class="control-label"></label>
+                <input asp-for="description" class="form-control" />
+                <span asp-validation-for="description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="detailedDescription" class="control-label"></label>
+                <input asp-for="detailedDescription" class="form-control" />
+                <span asp-validation-for="detailedDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="price" class="control-label"></label>
+                <input asp-for="price" class="form-control" />
+                <span asp-validation-for="price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="discountPrice" class="control-label"></label>
+                <input asp-for="discountPrice" class="form-control" />
+                <span asp-validation-for="discountPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
