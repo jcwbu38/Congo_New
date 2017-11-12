@@ -1,0 +1,18 @@
+﻿@using test5.Models;
+@{
+    ViewBag.Title = "Product Details";
+}
+
+<!-- Display general product info here... -->
+<div class="product">
+    <br />
+    <h1> New Products</h1>
+    <li>
+        <ul>
+            <img src="@Model.image" />
+            <p class="prod_desc"><strong>NEW! </strong>@Model.description</p>
+            <p class="pricing">@Model.price</p>
+            <button>Add to Cart</button>
+        </ul>
+    </li>
+</div>

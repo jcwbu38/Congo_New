@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace test5.Models
+namespace test5.Models.ShoppingCart
 {
-    public class Product
+    public class Cart
     {
         public string image { set; get; }
         public string description { set; get; }
         public string price { set; get; }
         public string discountPrice { set; get; }
         public DateTime EntryDate;
-        public int itemID { set; get; }
-        // This is a local var to be used for displaying purposes and doesn't need to be in the dB model.
-        public int productCount { set; get; }
     }
 }
