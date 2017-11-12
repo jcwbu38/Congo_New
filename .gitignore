@@ -319,8 +319,11 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
-Debug/
-*.cache
+# ignore bin directory
+bin/
+
+# ignore obj directory
+obj/
 
 
 # OpenCover UI analysis results
