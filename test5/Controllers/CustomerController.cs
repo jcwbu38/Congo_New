@@ -1,103 +1,105 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using SQLitePCL;
+﻿// Wasn't ready to push this controller to Main. Still a work in progress. ~Derek
 
-namespace test5.Controllers
-{
-    public class CustomerController : Controller
-    {
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Mvc;
+//using SQLitePCL;
 
-        private ApplicationDbContext _context;
+//namespace test5.Controllers
+//{
+//    public class CustomerController : Controller
+//    {
 
-        public CustomersController()
-        {
-            _context = new ApplicationDbContext();
-        }
+//        private ApplicationDbContext _context;
 
-        protected override void Dispose(bool disposing)
-        {
-            _context.Dispose();
-        }
+//        public CustomersController()
+//        {
+//            _context = new ApplicationDbContext();
+//        }
 
-        public ActionResult New()
-        {
-            var membershipTypes = _context.MembershipTypes.ToList();
-            var viewModel = new CustomerFormViewModel
-            {
-                Customer = new Customer(),
-                MembershipTypes = membershipTypes
-            };
+//        protected override void Dispose(bool disposing)
+//        {
+//            _context.Dispose();
+//        }
 
-            return View("CustomerForm", viewModel);
-        }
+//        public ActionResult New()
+//        {
+//            var membershipTypes = _context.MembershipTypes.ToList();
+//            var viewModel = new CustomerFormViewModel
+//            {
+//                Customer = new Customer(),
+//                MembershipTypes = membershipTypes
+//            };
+
+//            return View("CustomerForm", viewModel);
+//        }
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Save(Customer customer)
-        {
-            if (!ModelState.IsValid)
-            {
-                var viewModel = new CustomerFormViewModel
-                {
-                    Customer = customer,
-                    MembershipTypes = _context.MembershipTypes.ToList()
-                };
+//        [HttpPost]
+//        [ValidateAntiForgeryToken]
+//        public ActionResult Save(Customer customer)
+//        {
+//            if (!ModelState.IsValid)
+//            {
+//                var viewModel = new CustomerFormViewModel
+//                {
+//                    Customer = customer,
+//                    MembershipTypes = _context.MembershipTypes.ToList()
+//                };
 
-                return View("CustomerForm", viewModel);
-            }
+//                return View("CustomerForm", viewModel);
+//            }
 
-            if (customer.Id == 0)
-            {
-                _context.Customers.Add(customer);
-            }
-            else
-            {
-                var customerInDb = sqlite3_context.Customers.Single(c => c.Id == customer.Id);
-                customerInDb.Name = customer.Name;
-                customerInDb.Birthdate = customer.Birthdate;
-                customerInDb.MembershipTypeId = customer.MembershipTypeId;
-                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
-            }
+//            if (customer.Id == 0)
+//            {
+//                _context.Customers.Add(customer);
+//            }
+//            else
+//            {
+//                var customerInDb = sqlite3_context.Customers.Single(c => c.Id == customer.Id);
+//                customerInDb.Name = customer.Name;
+//                customerInDb.Birthdate = customer.Birthdate;
+//                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+//                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+//            }
 
-            _context.SaveChanges();
+//            _context.SaveChanges();
 
-            return RedirectToAction("Index", "Customer");    
-        }
+//            return RedirectToAction("Index", "Customer");    
+//        }
 
-        public ViewResult Index()
-        {
-            return View();
-        }
+//        public ViewResult Index()
+//        {
+//            return View();
+//        }
 
-        public ActionResult Details(int id)
-        {
-            var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);
+//        public ActionResult Details(int id)
+//        {
+//            var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);
 
-            if (customer == null)
-                return HttpNotFound();
+//            if (customer == null)
+//                return HttpNotFound();
 
-            return View(customer);
-        }
+//            return View(customer);
+//        }
 
-        public ActionResult Edit(int id)
-        {
-            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+//        public ActionResult Edit(int id)
+//        {
+//            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
 
-            if (customer == null)
-                return HttpNotFound();
+//            if (customer == null)
+//                return HttpNotFound();
 
-            var viewModel = new CustomerFormViewModel
-            {
-                Customer = customer,
-                MembershipTypes = _context.MembershipTypes.ToList()
-            };
+//            var viewModel = new CustomerFormViewModel
+//            {
+//                Customer = customer,
+//                MembershipTypes = _context.MembershipTypes.ToList()
+//            };
 
-            return View("CustomerForm", viewModel);
-        }
+//            return View("CustomerForm", viewModel);
+//        }
 
-    }
-}
+//    }
+//}
