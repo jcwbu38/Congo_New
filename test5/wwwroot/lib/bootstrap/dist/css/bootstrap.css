@@ -6839,22 +6839,22 @@ td.visible-print {
 }
 
 .cartItemNum {
-    width: 20px;
+    width: 5%;
 }
 .cartItemDesc {
-    width: 300px;
+    width: 35%;
     text-wrap: normal;
 }
 .cartItemPrice {
-    width: 100px;
+    width: 10%;
 }
 .cartItemImg {
-    width: 100px;
-    height: 100px;
+    width: 20%;
+    height: 20%;
 }
 .cartItemQty {
-    width: 80px;
+    width: 10%;
 }
 .cartItemUpdate {
-    width: 80px;
+    width: 15%;
 }
