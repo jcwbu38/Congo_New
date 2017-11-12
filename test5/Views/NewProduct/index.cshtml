@@ -14,7 +14,7 @@
                 if (product.EntryDate.Year == DateTime.Today.Year)
                 {
                     <ul>
-                        <img src="@product.image" />
+                        <a href="/Home/ProductDetails/@product.itemID"><img src="@product.image" /></a>
                         <p class="prod_desc"><strong>NEW! </strong>@product.description</p>
                         <p class="pricing">@product.price</p>
                     </ul>
