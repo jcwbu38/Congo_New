@@ -1754,7 +1754,12 @@ textarea.form-control {
 }
 
 .form-group {
-  margin-bottom: 15px;
+    border: solid 1px gray;
+    text-align: center;
+}
+
+.form-group textarea {
+    margin-top: 7em;
 }
 
 .radio,
@@ -6826,6 +6831,19 @@ td.visible-print {
     border: 1px solid lightgray;
 }
 
+.product a {
+    text-decoration: none;
+    color: black;
+}
+
+.product_details li {
+    list-style: none;
+}
+
+.product_details ul {
+    display: inline-block;
+}
+
 .prod_desc {
     padding: 0em 1.0em 0em 0em;
     max-width: 260px;
@@ -6836,6 +6854,10 @@ td.visible-print {
     padding: 0em 1.0em 0em 1.0em;
     font-size: medium;
     font-weight: 600;
+}
+
+.cart {
+    border: solid 1px gray;
 }
 
 .cartItemNum {
@@ -6857,4 +6879,8 @@ td.visible-print {
 }
 .cartItemUpdate {
     width: 15%;
+}
+
+.cartCheckout {
+    float: right;
 }

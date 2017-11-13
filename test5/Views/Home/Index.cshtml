@@ -10,21 +10,25 @@
     <li>
         @foreach (var product in Model)
         {
-            <ul><img src="@product.image"/>
-                <p class="prod_desc">
-                    @if (product.EntryDate.Year == DateTime.Today.Year)
-                    {
-                        <strong>NEW! </strong>
-                    }
-                    @product.description
-                </p>
-            <p class="pricing">
-                @if (!String.IsNullOrEmpty(product.discountPrice))
-                {
-                    <i style="text-decoration: line-through; margin-right: 1.0em;">@product.discountPrice</i><strong>Now </strong>
-                }
-                @product.price
-            </p></ul>
+            <ul>
+                <a href="/Home/ProductDetails/@product.itemID">
+                    <img src="@product.image" />
+                    <p class="prod_desc">
+                        @if (product.EntryDate.Year == DateTime.Today.Year)
+                        {
+                            <strong>NEW! </strong>
+                        }
+                        @product.description
+                    </p>
+                    <p class="pricing">
+                        @if (product.discountPrice > 0)
+                        {
+                            <i style="text-decoration: line-through; margin-right: 1.0em;">$@product.discountPrice USD</i><strong>Now </strong>
+                        }
+                        $@product.price USD
+                    </p>
+                </a>
+            </ul>
         }
     </li>
 </div>

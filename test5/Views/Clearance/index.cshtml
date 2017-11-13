@@ -10,13 +10,15 @@
     <li>
         @foreach (var product in Model)
         {
-                if (!String.IsNullOrEmpty(product.discountPrice))
+                if (product.discountPrice > 0)
                 {
                     <ul>
-                        <img src="@product.image" />
-                        <p class="prod_desc">@product.description</p>
-                        <i style="text-decoration: line-through; margin-right: 1.0em;">@product.discountPrice</i>
-                        <strong>Now @product.price</strong>
+                        <a href="/Home/ProductDetails/@product.itemID">
+                            <img src="@product.image" />
+                            <p class="prod_desc">@product.description</p>
+                            <i style="text-decoration: line-through; margin-right: 1.0em;">$@product.discountPrice USD</i>
+                            <strong>Now $@product.price USD</strong>
+                        </a>
                     </ul>
                 }
         }

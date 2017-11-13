@@ -3,10 +3,13 @@
 @{
     ViewBag.Title = "New Products";
 }
+
 <br />
 <h1>Shopping Cart</h1>
 @using (Html.BeginForm("View", "ShoppingCart"))
 {
+    var totalPrice = 0.0;
+    var totalQty = 0;
     <div class="form-group">
         <label class="cartItemNum">Item #</label>
         <label class="cartItemDesc">Descrption</label>
@@ -22,14 +25,33 @@
             <label class="cartItemNum">@count</label>
             <label class="cartItemDesc">@item.description</label>
             <img class="cartItemImg" src="@item.image"></img>
-            <label class="cartItemPrice">@item.price USD</label>
+            @if(item.discountPrice > 0)
+            {
+                <label class="cartItemPrice">$@item.discountPrice USD</label>
+            }
+            else
+            {
+                <label class="cartItemPrice">$@item.price USD</label>
+            }
             <textarea class="cartItemQty">3</textarea>
             <button class="cartItemUpdate">Update</button>
         </div>
         ++count;
+        totalPrice += @item.price;
+        totalQty += 3;
     }
     <br />
-    <div>
-        <button>Checkout</button>
+    <div style="text-align: center;">
+        <label class="cartItemNum"></label>
+        <label class="cartItemDesc"></label>
+        <label class="cartItemImg"></label>
+        <label class="cartItemPrice">$@totalPrice USD</label>
+        <label class="cartItemQty">@totalQty</label>
+        <label class="cartItemUpdate">Total</label>
     </div>
+    <br />
+    <div>
+        <button class="cartCheckout">Checkout</button>
+    </div>
+    <br style="float: none;"/>
 }

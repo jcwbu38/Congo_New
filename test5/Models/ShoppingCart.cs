@@ -9,8 +9,8 @@ namespace test5.Models.ShoppingCart
     {
         public string image { set; get; }
         public string description { set; get; }
-        public string price { set; get; }
-        public string discountPrice { set; get; }
+        public double price { set; get; }
+        public double discountPrice { set; get; }
         public DateTime EntryDate;
     }
 }
