@@ -1,7 +1,7 @@
 ﻿@using test5.Models.ShoppingCart;
 
 @{
-    ViewBag.Title = "New Products";
+    ViewBag.Title = "Shopping Cart";
 }
 
 <br />
@@ -33,12 +33,12 @@
             {
                 <label class="cartItemPrice">$@item.price USD</label>
             }
-            <textarea class="cartItemQty">3</textarea>
-            <button class="cartItemUpdate">Update</button>
+            <textarea class="cartItemQty" id="itemQty">@item.quantity</textarea>
+            <button class="cartItemUpdate" onclick="UpdateItem();">Update</button>
         </div>
         ++count;
         totalPrice += @item.price;
-        totalQty += 3;
+        totalQty += item.quantity;
     }
     <br />
     <div style="text-align: center;">

@@ -46,6 +46,10 @@ namespace test5
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "addToCart",
+                    template: "{controller=Home}/{action=Add}/{id}/{qty}");
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

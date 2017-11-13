@@ -2,29 +2,31 @@
 @{
     ViewBag.Title = "Product Details";
 }
+<script>
+    function addToCart()
+    {
+        parent.location = "/Home/Add/@Model.itemID/1";
 
+    }
+</script>
 <!-- Display general product info here... -->
 <div class="product_details">
     <br />
     <h1> Product Details</h1>
-    <li>
-        <ul>
-            <img src="@Model.image" />
-            <p class="prod_desc">
-                @if (Model.EntryDate.Year == DateTime.Today.Year)
-            {
-                    <strong>NEW! </strong>
-                }
-                @Model.description
-            <p class="pricing">
-            @if (Model.discountPrice > 0)
-             {
-                <i style="text-decoration: line-through; margin-right: 1.0em;">$@Model.discountPrice USD</i><strong>Now </strong>
-              }
-             $@Model.price USD
-            </p>
+    <img src="@Model.image" />
+    <p class="prod_desc">
+        @if (Model.EntryDate.Year == DateTime.Today.Year)
+    {
+            <strong>NEW! </strong>
+        }
+        @Model.description
+    <p class="pricing">
+    @if (Model.discountPrice > 0)
+        {
+        <i style="text-decoration: line-through; margin-right: 1.0em;">$@Model.discountPrice USD</i><strong>Now </strong>
+        }
+        $@Model.price USD
+    </p>
 
-            <button>Add to Cart</button>
-        </ul>
-    </li>
+    <button onclick="addToCart()">Add to Cart</button>
 </div>
