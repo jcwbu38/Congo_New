@@ -1,4 +1,4 @@
-﻿@using test5.Models;
+﻿@model Inventory
 @{
     ViewBag.Title = "Home Page";
 }
@@ -8,23 +8,23 @@
     <br />
     <h1> All Products</h1>
     <li>
-        @foreach (var product in Model)
+        @foreach (var product in Model.Products)
         {
             <ul><img src="@product.image"/>
                 <p class="prod_desc">
-                    @if (product.EntryDate.Year == DateTime.Today.Year)
+                    @if (product.entryDate.Year == DateTime.Today.Year)
                     {
                         <strong>NEW! </strong>
                     }
                     @product.description
                 </p>
-            <p class="pricing">
-                @if (!String.IsNullOrEmpty(product.discountPrice))
-                {
-                    <i style="text-decoration: line-through; margin-right: 1.0em;">@product.discountPrice</i><strong>Now </strong>
-                }
-                @product.price
-            </p></ul>
+                <p class="pricing">
+                    @if (!String.IsNullOrEmpty(product.discountPrice))
+                    {
+                        <i style="text-decoration: line-through; margin-right: 1.0em;">@product.discountPrice</i><strong>Now </strong>
+                    }
+                    @product.price
+                </p></ul>
         }
     </li>
 </div>

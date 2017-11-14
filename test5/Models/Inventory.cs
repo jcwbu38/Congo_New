@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
 namespace test5.Models
 {
     public class Inventory
@@ -14,7 +19,18 @@ namespace test5.Models
         public string detailedDescription { set; get; }
         public string price { set; get; }
         public string discountPrice { set; get; }
-        public DateTime entryDate;
+        public DateTime entryDate { get; set; }
+
+        public virtual List<Inventory> Products { get; set; }
+
+
+        public Inventory()
+        {
+            entryDate = DateTime.UtcNow;
+        }
+
+
+        
 
     }
 }
