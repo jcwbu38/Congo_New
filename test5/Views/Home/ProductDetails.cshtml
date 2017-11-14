@@ -1,11 +1,13 @@
 ﻿@using test5.Models;
+@model test5.Models.Inventory
+
 @{
     ViewBag.Title = "Product Details";
 }
 <script>
     function addToCart()
     {
-        parent.location = "/Home/Add/@Model.itemID/1";
+        parent.location = "/Home/Add/@Model.ID";
 
     }
 </script>
