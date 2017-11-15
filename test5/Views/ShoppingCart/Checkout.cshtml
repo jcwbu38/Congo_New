@@ -1,0 +1,26 @@
+﻿@@using test5.Models;
+@{
+    ViewBag.Title = "Checkout";
+}
+
+<!-- Display general product info here... -->
+<div>
+    <br />
+    <h1> Checkout</h1>
+    <li class="checkout">
+        @foreach (var item in Model)
+        {
+            <ul>
+                <p class="cartItemDesc">@item.description</p>
+                    @if (item.discountPrice > 0)
+                    {
+                        <p class="pricing">$@item.discountPrice USD</p>
+                    }
+                    else
+                    {
+                        <p class="pricing">$@item.price USD</p>
+                    }
+            </ul>
+        }
+    </li>
+</div>
