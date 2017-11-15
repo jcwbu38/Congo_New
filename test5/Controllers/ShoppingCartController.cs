@@ -21,11 +21,6 @@ namespace test5.Controllers
             return View(products);
         }
 
-        public ActionResult New()
-        {
-            return View();
-        }
-
         public IActionResult Checkout()
         {
             return View(products);
