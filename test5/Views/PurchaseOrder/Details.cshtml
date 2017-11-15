@@ -1,0 +1,96 @@
+@model test5.Models.PurchaseOrder
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PurchaseOrder</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.productName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.productName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.productID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.productID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.datePurchased)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.datePurchased)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.stowLocation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.stowLocation)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.shipDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.shipDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.customerFirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.customerFirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.customerLastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.customerLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.customerID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.customerID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.address1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.address1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.address2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.address2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.zip)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.zip)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
