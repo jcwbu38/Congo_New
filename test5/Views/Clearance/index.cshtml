@@ -1,4 +1,4 @@
-﻿@using test5.Models;
+﻿@model IEnumerable<test5.Models.Inventory>
 @{
     ViewBag.Title = "Clearance Items";
 }
@@ -13,7 +13,7 @@
                 if (product.discountPrice > 0)
                 {
                     <ul>
-                        <a href="/Home/ProductDetails/@product.itemID">
+                        <a href="/Home/ProductDetails/@product.ID">
                             <img src="@product.image" />
                             <p class="prod_desc">@product.description</p>
                             <i style="text-decoration: line-through; margin-right: 1.0em;">$@product.discountPrice USD</i>
