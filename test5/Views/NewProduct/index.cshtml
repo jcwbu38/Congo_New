@@ -1,4 +1,6 @@
 ﻿@using test5.Models;
+@model IEnumerable<test5.Models.Inventory>
+
 @{
     ViewBag.Title = "New Products";
 }
@@ -11,13 +13,26 @@
         
         @foreach (var product in Model)
         {
-                if (product.EntryDate.Year == DateTime.Today.Year)
+                if (product.dateReceived.Year == DateTime.Today.Year)
                 {
                     <ul>
-                        <a href="/Home/ProductDetails/@product.itemID">
+                        <a href="/Home/ProductDetails/@product.ID">
                             <img src="@product.image" />
-                            <p class="prod_desc"><strong>NEW! </strong>@product.description</p>
-                            <p class="pricing">$@product.price USD</p>
+                            <p class="prod_desc">
+                                @if (product.EntryDate.Year == DateTime.Today.Year)
+                                {
+                                    <strong>NEW! </strong>
+                                }
+                                @product.description
+                            </p>
+                            <p class="pricing">
+                                @if (Convert.ToInt32(product.discountPrice) > 0)
+                                {
+                                    <i style="text-decoration: line-through; margin-right: 1.0em;">$@product.discountPrice USD</i><strong>Now </strong>
+                                }
+                                @product.price USD
+
+                            </p>
                         </a>
                     </ul>
                 }
