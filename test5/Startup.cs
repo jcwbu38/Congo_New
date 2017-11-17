@@ -24,8 +24,17 @@ namespace test5
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            // Add Inventory DB
             services.AddDbContext<InventoryContext>(options =>
             options.UseSqlite("Data Source=Inventory.db"));
+
+            // Add User DB
+            services.AddDbContext<UserContext>(options =>
+            options.UseSqlite("Data Source=User.db"));
+
+            // Add Purchase Order DB
+            services.AddDbContext<PurchaseOrderContext>(options =>
+            options.UseSqlite("Data Source=PurchaseOrder.db"));
 
         }
 

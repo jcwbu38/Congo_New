@@ -6884,3 +6884,7 @@ td.visible-print {
 .cartCheckout {
     float: right;
 }
+
+.checkout {
+    list-style: none;
+}
