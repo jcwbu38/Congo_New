@@ -5,6 +5,10 @@ namespace test5.Models
 {
     public class UserContext : DbContext
     {
+        public UserContext()
+        {
+        }
+
         public UserContext(DbContextOptions<UserContext> options)
             : base(options)
         {
