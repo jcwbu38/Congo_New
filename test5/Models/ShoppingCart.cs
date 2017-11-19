@@ -12,6 +12,7 @@ namespace test5.Models.ShoppingCart
         public double price { set; get; }
         public double discountPrice { set; get; }
         public DateTime EntryDate;
-        public int quantity {set; get; }
+        public int quantity { set; get; }
+        public int id { set; get;}
     }
 }

@@ -16,9 +16,33 @@ namespace test5.Controllers
         {
             if (newCart.price > 0)
             {
+                foreach( var item in products)
+                {
+                    if (newCart.id == item.id)
+                        return View(products);
+                }
                 products.Add(newCart);
             }
             return View(products);
+        }
+
+        public IActionResult Update(int id, int qty)
+        {
+
+            foreach (var item in products)
+            {
+                if (id == item.id)
+                {
+                    if (qty < 1)
+                        products.Remove(item);
+                    else
+                        item.quantity = qty;
+
+                    return View("Index", products);
+                }
+            }
+
+            return View("Index", products);
         }
 
         public IActionResult Checkout()

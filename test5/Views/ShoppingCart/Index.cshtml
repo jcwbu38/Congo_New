@@ -3,11 +3,17 @@
 @{
     ViewBag.Title = "Shopping Cart";
 }
+<script>
+    function updateCart(itemID)
+    {
+        var itemQty = document.getElementById("qty_" + itemID)
+        parent.location = "/ShoppingCart/Update/" + itemID + "/" + itemQty.value;
 
+    }
+</script>
 <br />
 <h1>Shopping Cart</h1>
-@using (Html.BeginForm("View", "ShoppingCart"))
-{
+@{
     var totalPrice = 0.0;
     var totalQty = 0;
     <div class="form-group">
@@ -33,9 +39,11 @@
             {
                 <label class="cartItemPrice">$@item.price USD</label>
             }
-            <textarea class="cartItemQty" id="itemQty">@item.quantity</textarea>
-            <button class="cartItemUpdate" onclick="UpdateItem();">Update</button>
-        </div>
+            
+            <textarea class="cartItemQty" id="qty_@item.id" >@item.quantity</textarea>
+            <button class="cartItemUpdate" onclick="updateCart(@item.id);">Update</button>
+            
+</div>
         ++count;
         totalPrice += @item.price;
         totalQty += item.quantity;
