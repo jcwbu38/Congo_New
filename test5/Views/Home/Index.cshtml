@@ -13,7 +13,8 @@
         @foreach (var product in Model)
         {
             <ul>
-                <a href="/Home/ProductDetails/@product.ID">
+                <!-- requirement 3.2.12.3.1 -->
+                <a href="/Home/ProductDetails/@product.itemID">
                     <img src="@product.image" />
                     <p class="prod_desc">
                         @if (product.dateReceived.Year == DateTime.Today.Year)
@@ -25,9 +26,9 @@
                     <p class="pricing">
                         @if (Convert.ToInt32(product.discountPrice) > 0)
                         {
-                            <i style="text-decoration: line-through; margin-right: 1.0em;">$@product.discountPrice USD</i><strong>Now </strong>
+                            <i style="text-decoration: line-through; margin-right: 1.0em;">$@product.discountPrice USD</i><strong>Now </strong> <!-- requirement 3.2.8.3.1 -->
                         }
-                        @product.price USD
+                        @product.price USD <!-- requirement 3.2.8.3.1, 3.4.2 -->
 
                     </p>
                 </a>

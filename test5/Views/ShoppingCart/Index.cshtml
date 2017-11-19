@@ -4,10 +4,27 @@
     ViewBag.Title = "Shopping Cart";
 }
 <script>
+
+    function applyDiscount()
+    {
+        var code = document.getElementById("discountCode").value;
+        if (code != null)
+        {
+            parent.location = "/ShoppingCart/Discount/" + code;
+        }
+
+    }
+
     function updateCart(itemID)
     {
-        var itemQty = document.getElementById("qty_" + itemID)
-        parent.location = "/ShoppingCart/Update/" + itemID + "/" + itemQty.value;
+        var itemQty = parseInt(document.getElementById("qty_" + itemID).value);
+        var qtyInStock = 6;
+        if (itemQty > qtyInStock) // Requirement 3.2.8.3.2
+        {
+            alert( "Sorry, you cannot purchase " + itemQty + " because there are only " + qtyInStock + " in stock.");
+        }
+        else
+            parent.location = "/ShoppingCart/Update/" + itemID + "/" + itemQty;
 
     }
 </script>
@@ -33,19 +50,19 @@
             <img class="cartItemImg" src="@item.image"></img>
             @if(item.discountPrice > 0)
             {
-                <label class="cartItemPrice">$@item.discountPrice USD</label>
+                <label class="cartItemPrice" id="disc_@item.id">$@item.discountPrice USD</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
             }
             else
             {
-                <label class="cartItemPrice">$@item.price USD</label>
+                <label class="cartItemPrice">$@item.price USD</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
             }
             
-            <textarea class="cartItemQty" id="qty_@item.id" >@item.quantity</textarea>
+            <textarea class="cartItemQty" id="qty_@item.id" >@item.quantity</textarea> <!-- requirement 3.2.11.3.2 -->
             <button class="cartItemUpdate" onclick="updateCart(@item.id);">Update</button>
             
-</div>
+        </div>
         ++count;
-        totalPrice += @item.price;
+        totalPrice += item.discountPrice > 0 ? item.discountPrice : item.price;
         totalQty += item.quantity;
     }
     <br />
@@ -53,11 +70,16 @@
         <label class="cartItemNum"></label>
         <label class="cartItemDesc"></label>
         <label class="cartItemImg"></label>
-        <label class="cartItemPrice">$@totalPrice USD</label>
-        <label class="cartItemQty">@totalQty</label>
+        <label class="cartItemPrice">$@totalPrice USD</label> <!-- requirement 3.2.11.3.2, 3.4.2, 3.5.1.2  -->
+        <label class="cartItemQty">@totalQty</label> <!-- requirement 3.2.11.3.2 -->
         <label class="cartItemUpdate">Total</label>
     </div>
     <br />
+    <div>
+        <label >Discount Code: </label>
+        <textarea id="discountCode"></textarea>
+        <button onclick="applyDiscount()">Apply</button>
+    </div>
     <div>
         <button class="cartCheckout">@Html.ActionLink("Checkout", "Checkout", "ShoppingCart")</button>
     </div>

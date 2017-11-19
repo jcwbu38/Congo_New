@@ -5,23 +5,49 @@
     ViewBag.Title = "Product Details";
 }
 <script>
-    function addToCart()
+    // requierment 3.2.9.3.2, 3.2.9.3.3
+    function checkStock()
     {
-        parent.location = "/Home/Add/@Model.ID/1";
+        if (1 < 0)
+        {
+            document.getElementById("addButton").innerHTML = "Out of Stock";
+            document.getElementById("addButton").disabled = true;
+
+        }
 
     }
+
+    function addToCart()
+    {
+
+        var addQty = parseInt(document.getElementById("numToAdd").value);
+        if (addQty < 1) // Requirement 3.2.8.3.2
+        {
+            alert("Error, you have entered an invalid quantity of " + addQty + ". Please try again.");
+        }
+        else if (addQty > 5) // Requirement 3.2.8.3.2
+        {
+            alert("Error, you have entered a quantity of " + addQty + " which is greater than what is in stock. Please try again.");
+        }
+        else
+        {
+            parent.location = "/Home/Add/@Model.itemID/" + addQty;
+        }
+    }
+
 </script>
 <!-- Display general product info here... -->
 <div class="product_details">
     <br />
     <h1> Product Details</h1>
     <img src="@Model.image" />
-    <p class="prod_desc">
+    <br />
+    <p>
         @if (Model.EntryDate.Year == DateTime.Today.Year)
     {
             <strong>NEW! </strong>
         }
-        @Model.description
+        @Model.detailedDescription
     <p class="pricing">
     @if (Model.discountPrice > 0)
         {
@@ -29,6 +55,7 @@
         }
         $@Model.price USD
     </p>
-
+    <p>XX In Stock</p>
+    <textarea id="numToAdd">1</textarea>
     <button onclick="addToCart()">Add to Cart</button>
 </div>

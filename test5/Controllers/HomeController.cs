@@ -34,7 +34,7 @@ namespace test5.Controllers
             }
 
             var inventory = await _context.Inventory
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.itemID == id);
             if (inventory == null)
             {
                 return NotFound();
@@ -51,7 +51,7 @@ namespace test5.Controllers
             }
 
             var inventory = await _context.Inventory
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.itemID == id);
             if (inventory == null)
             {
                 return NotFound();
