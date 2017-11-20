@@ -14,7 +14,8 @@ namespace test5.Models
         public string detailedDescription { set; get; }
         public double price { set; get; }
         public int discountPrice { set; get; }
-        public DateTime EntryDate;
+        public DateTime EntryDate { set; get; }
+        public int quantity { set; get; }
 
     }
 }

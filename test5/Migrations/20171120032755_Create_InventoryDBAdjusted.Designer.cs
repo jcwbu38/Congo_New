@@ -11,9 +11,10 @@ using test5.Models;
 namespace test5.Migrations
 {
     [DbContext(typeof(InventoryContext))]
-    partial class InventoryContextModelSnapshot : ModelSnapshot
+    [Migration("20171120032755_Create_InventoryDBAdjusted")]
+    partial class Create_InventoryDBAdjusted
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

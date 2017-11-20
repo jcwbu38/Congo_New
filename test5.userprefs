@@ -1,0 +1,17 @@
+﻿<Properties StartupConfiguration="{8BDD7557-397F-4A1C-A830-FE06B9A4E043}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="test5/Controllers/InventoryController.cs">
+    <Files>
+      <File FileName="test5/Views/Home/ProductDetails.cshtml" Line="65" Column="2" />
+      <File FileName="test5/Models/Inventory.cs" Line="18" Column="42" />
+      <File FileName="test5/Controllers/HomeController.cs" Line="43" Column="34" />
+      <File FileName="test5/Controllers/InventoryController.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.test5 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>
