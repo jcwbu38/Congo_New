@@ -53,7 +53,7 @@ namespace test5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice,EntryDate,quantity")] Inventory inventory)
+        public async Task<IActionResult> Create([Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice, quantity, EntryDate")] Inventory inventory)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace test5.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice,EntryDate,quantity")] Inventory inventory)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice,quantity, EntryDate")] Inventory inventory)
         {
             if (id != inventory.ID)
             {
