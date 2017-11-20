@@ -8,20 +8,13 @@
     // requierment 3.2.9.3.2, 3.2.9.3.3
     function checkStock()
     {
-	    var itemQuantity = 0;
-        for (var product in Model.Inventory)
-	    {
-            if (product.itemID == Model.itemID) {
-                itemQuantity++
-	        }
-	    }
-
-	    if (itemQuanity <= 0)
+        if (1 < 0)
         {
             document.getElementById("addButton").innerHTML = "Out of Stock";
-            document.getElementById("addButton").disabled = true;         
+            document.getElementById("addButton").disabled = true;
+
         }
-	    return itemQuantity;
+
     }
 
     function addToCart()
@@ -62,7 +55,7 @@
         }
         $@Model.price USD
     </p>
-    <p><script>checkStock();</script></p>
-    <textarea id="numToAdd">1</textarea>
+    <p>XX In Stock</p>
+    <textarea class="product_details" id="numToAdd">1</textarea>
     <button onclick="addToCart()">Add to Cart</button>
 </div>

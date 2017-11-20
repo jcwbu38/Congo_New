@@ -6844,6 +6844,11 @@ td.visible-print {
     display: inline-block;
 }
 
+.product_details textarea {
+    height: 2em;
+    width: 3em;
+}
+
 .prod_desc {
     padding: 0em 1.0em 0em 0em;
     max-width: 260px;
@@ -6875,10 +6880,16 @@ td.visible-print {
     height: 20%;
 }
 .cartItemQty {
-    width: 10%;
+    width: 3em;
+    height: 2em;
 }
 .cartItemUpdate {
     width: 15%;
+    margin-left: 2em;
+}
+
+.cartDiscCode {
+    height: 2em;
 }
 
 .cartCheckout {

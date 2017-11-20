@@ -14,5 +14,6 @@ namespace test5.Models.ShoppingCart
         public DateTime EntryDate;
         public int quantity { set; get; }
         public int id { set; get;}
+        public string discountCode { set; get;  }
     }
 }

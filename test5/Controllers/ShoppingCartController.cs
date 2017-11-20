@@ -11,6 +11,9 @@ namespace test5.Controllers
     public class ShoppingCartController : Controller
     {
         public static List<Models.ShoppingCart.Cart> products = new List<Models.ShoppingCart.Cart>();
+        private static Dictionary<string, double> discountCodes = new Dictionary<string, double>() { { "Cody", 0.65 }, { "Derek", 0.60 }, { "Jon", 0.50 } };
+
+
 
         public ActionResult Index( Cart newCart)
         {
@@ -49,16 +52,21 @@ namespace test5.Controllers
         public IActionResult Discount(string id)
         {
             if (String.IsNullOrEmpty(id))
-                return Content("Error, discount code is null");
+                return Content("Error, discount code is invalid");
 
-            if ( id.Equals("test") ) //TODO check code for validity
+            foreach (var code in discountCodes)
             {
-                foreach( var item in products)
+                if (id.Equals(code.Key)) //TODO check code for validity
                 {
-                    item.discountPrice = item.price * 0.60;
+                    foreach (var item in products)
+                    {
+                        item.discountPrice = item.price * code.Value;
+                        item.discountCode = code.Key;
+                        return View("Index", products);
+                    }
                 }
             }
-            return View("Index", products);
+            return Content("Error, discount code is invalid");
         }
 
         public IActionResult Checkout()
