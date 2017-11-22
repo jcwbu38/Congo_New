@@ -57,7 +57,15 @@ namespace test5.Controllers
                 return NotFound();
             }
 
-            var newCart = new Models.ShoppingCart.Cart() { id = inventory.itemID, price = inventory.price, description = inventory.description, discountPrice = inventory.discountPrice, image = inventory.image, quantity = qty };
+            var newCart = new Models.ShoppingCart.Cart() {
+                id = inventory.itemID,
+                price = inventory.price,
+                description = inventory.description,
+                discountPrice = inventory.discountPrice,
+                image = inventory.image,
+                inventoryQuantity = inventory.quantity,
+                cartQuantity = qty };
+
             return RedirectToAction("Index", "ShoppingCart", newCart);
 
         }

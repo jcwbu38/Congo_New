@@ -38,8 +38,8 @@ namespace test5.Controllers
                 {
                     if (qty < 1) // requirement 3.5.1.1 
                         products.Remove(item);
-                    else
-                        item.quantity = qty;
+                    else if ( qty <= item.inventoryQuantity )
+                        item.cartQuantity = qty;
 
                     return View("Index", products);
                 }

@@ -17,17 +17,17 @@
 
     }
 
-    function addToCart()
+    function addToCart(invQty)
     {
 
         var addQty = parseInt(document.getElementById("numToAdd").value);
         if (addQty < 1) // Requirement 3.2.8.3.2
         {
-            alert("Error, you have entered an invalid quantity of " + addQty + ". Please try again.");
+            alert("Error, you have entered an invalid quantity of " + addQty + ". Please enter a different quantity.");
         }
-        else if (addQty > 5) // Requirement 3.2.8.3.2
+        else if (addQty > parseInt(invQty) ) // Requirement 3.2.8.3.2
         {
-            alert("Error, you have entered a quantity of " + addQty + " which is greater than what is in stock. Please try again.");
+            alert("Error, you have entered a quantity of " + addQty + " which is greater than what is in stock ( " + invQty + "). Please enter a different quantity.");
         }
         else
         {
@@ -44,18 +44,27 @@
     <br />
     <p>
         @if (Model.EntryDate.Year == DateTime.Today.Year)
-    {
+        {
             <strong>NEW! </strong>
         }
         @Model.detailedDescription
     <p class="pricing">
     @if (Model.discountPrice > 0)
-        {
+    {
         <i style="text-decoration: line-through; margin-right: 1.0em;">$@Model.discountPrice USD</i><strong>Now </strong>
-        }
+    }
         $@Model.price USD
     </p>
-    <p>XX In Stock</p>
+    @{ if (Model.quantity < 1)
+        {
+           <p>Out of Stock</p>
+        }
+        else
+        {
+            <p>@Model.quantity In Stock</p>
+        }
+    }
+            
     <textarea class="product_details" id="numToAdd">1</textarea>
-    <button onclick="addToCart()">Add to Cart</button>
+    <button onclick="addToCart(@Model.quantity)">Add to Cart</button>
 </div>
