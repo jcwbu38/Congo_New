@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using test5.Models;
+using test5.ViewModels;
 
 namespace test5.Controllers
 {
@@ -142,6 +143,33 @@ namespace test5.Controllers
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Save(User user)
+        {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CreateUserViewModel
+                {
+                    User = user
+                };
+
+                return View("Create", viewModel);
+            }
+
+            if (user.ID == 0)
+                _context.User.Add(user);
+            else
+            {
+                var customerInDb = _context.User.Single(u => u.ID == user.ID);
+                customerInDb.first = user.first;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Create", "User");
         }
 
         private bool UserExists(int id)

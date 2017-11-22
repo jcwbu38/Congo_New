@@ -1,4 +1,4 @@
-@model test5.Models.User
+@model test5.ViewModels.CreateUserViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -8,51 +8,25 @@
 
 <h4>User</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="first" class="control-label"></label>
-                <input asp-for="first" class="form-control" />
-                <span asp-validation-for="first" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="last" class="control-label"></label>
-                <input asp-for="last" class="form-control" />
-                <span asp-validation-for="last" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="address1" class="control-label"></label>
-                <input asp-for="address1" class="form-control" />
-                <span asp-validation-for="address1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="address2" class="control-label"></label>
-                <input asp-for="address2" class="form-control" />
-                <span asp-validation-for="address2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="state" class="control-label"></label>
-                <input asp-for="state" class="form-control" />
-                <span asp-validation-for="state" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="zip" class="control-label"></label>
-                <input asp-for="zip" class="form-control" />
-                <span asp-validation-for="zip" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="email" class="control-label"></label>
-                <input asp-for="email" class="form-control" />
-                <span asp-validation-for="email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </form>
+<h2>New Customer</h2>
+
+@using (Html.BeginForm("Save", "User"))
+{ 
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.User.first)
+        @Html.TextBoxFor(m => m.User.first, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.User.first)
     </div>
-</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.User.email)
+        @Html.TextBoxFor(m => m.User.email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.User.email)
+    </div>
+    @Html.HiddenFor(m => m.User.ID)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
 
 <div>
     <a asp-action="Index">Back to List</a>
