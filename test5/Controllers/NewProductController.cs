@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using test5.Models;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 
 
 namespace test5.Controllers

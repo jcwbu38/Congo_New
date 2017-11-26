@@ -34,7 +34,7 @@ namespace test5.Controllers
             }
 
             var user = await _context.User
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -73,7 +73,7 @@ namespace test5.Controllers
                 return NotFound();
             }
 
-            var user = await _context.User.SingleOrDefaultAsync(m => m.ID == id);
+            var user = await _context.User.SingleOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace test5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,first,last,address1,address2,state,zip,email")] User user)
         {
-            if (id != user.ID)
+            if (id != user.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace test5.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.ID))
+                    if (!UserExists(user.Id))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace test5.Controllers
             }
 
             var user = await _context.User
-                .SingleOrDefaultAsync(m => m.ID == id);
+                .SingleOrDefaultAsync(m => m.Id == id);
             if (user == null)
             {
                 return NotFound();
@@ -139,7 +139,7 @@ namespace test5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.SingleOrDefaultAsync(m => m.ID == id);
+            var user = await _context.User.SingleOrDefaultAsync(m => m.Id == id);
             _context.User.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -159,12 +159,12 @@ namespace test5.Controllers
                 return View("Create", viewModel);
             }
 
-            if (user.ID == 0)
+            if (user.Id == 0)
                 _context.User.Add(user);
             else
             {
-                var customerInDb = _context.User.Single(u => u.ID == user.ID);
-                customerInDb.first = user.first;
+                var customerInDb = _context.User.Single(u => u.Id == user.Id);
+                customerInDb.First = user.First;
             }
 
             _context.SaveChanges();
@@ -174,7 +174,7 @@ namespace test5.Controllers
 
         private bool UserExists(int id)
         {
-            return _context.User.Any(e => e.ID == id);
+            return _context.User.Any(e => e.Id == id);
         }
     }
 }

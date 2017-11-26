@@ -1,15 +1,23 @@
-﻿using System;
+﻿using System.ComponentModel.DataAnnotations;
+
 namespace test5.Models
 {
     public class User
     {     
-        public int ID { get; set; }
-        public string first { get; set; }
-        public string last { get; set; }
-        public string address1 { get; set; }
-        public string address2 { get; set; }
-        public string state { get; set; }
-        public int zip { get; set; }
-        public string email { get; set; }
+        public int Id { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string First { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string Last { get; set; }
+        public string Address1 { get; set; }
+        public string Address2 { get; set; }
+        [StringLength(2)]
+        public string State { get; set; }
+        [MaxLength(5)]
+        public int Zip { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
     }
 }

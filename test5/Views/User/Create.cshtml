@@ -14,16 +14,16 @@
 { 
     @Html.ValidationSummary(true, "Please fix the following errors.")
     <div class="form-group">
-        @Html.LabelFor(m => m.User.first)
-        @Html.TextBoxFor(m => m.User.first, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.first)
+        @Html.LabelFor(m => m.User.First)
+        @Html.TextBoxFor(m => m.User.First, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.User.First)
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.User.email)
-        @Html.TextBoxFor(m => m.User.email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.email)
+        @Html.LabelFor(m => m.User.Email)
+        @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.User.Email)
     </div>
-    @Html.HiddenFor(m => m.User.ID)
+    @Html.HiddenFor(m => m.User.Id)
     @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
 }
