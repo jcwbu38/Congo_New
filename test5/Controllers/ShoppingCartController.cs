@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using test5.Models;
 using test5.Models.ShoppingCart;
+using test5.ViewModels;
 
 namespace test5.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        public static List<Models.ShoppingCart.Cart> products = new List<Models.ShoppingCart.Cart>();
+        public static List<Models.ShoppingCart.ShoppingCart> products = new List<Models.ShoppingCart.ShoppingCart>();
         private static Dictionary<string, double> discountCodes = new Dictionary<string, double>() { { "Cody", 0.65 }, { "Derek", 0.60 }, { "Jon", 0.50 } };
+        // Need a variable here to store current user
 
-
-
-        public ActionResult Index( Cart newCart)
+        public ActionResult Index(ShoppingCart newCart)
         {
             if (newCart.price > 0)
             {
@@ -71,7 +70,31 @@ namespace test5.Controllers
 
         public IActionResult Checkout()
         {
-            return View(products);
+            if (products.Count() > 0) {
+                var user = new User
+                {
+                    First = "Cody",
+                    Last = "Walters",
+                    Id = 1234,
+
+                    Address1 = "12438 SE 198th Place",
+                    City = "Kent",
+                    State = "Washington",
+                    Zip = 98031,
+                    Email = "jcw725@gmail.com"
+                        
+                };
+                var viewModel = new CheckoutViewModel
+                {
+                    User = user,
+                    ShoppingCart = products
+                };
+                return View(viewModel);
+
+            }
+            else {
+                return View("Index", products);
+            }
         }
     }
 }

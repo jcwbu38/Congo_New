@@ -12,9 +12,7 @@
         {
             document.getElementById("addButton").innerHTML = "Out of Stock";
             document.getElementById("addButton").disabled = true;
-
         }
-
     }
 
     function addToCart(invQty)
@@ -27,10 +25,11 @@
         }
         else if (addQty > parseInt(invQty) ) // Requirement 3.2.8.3.2
         {
-            alert("Error, you have entered a quantity of " + addQty + " which is greater than what is in stock ( " + invQty + "). Please enter a different quantity.");
+            alert("Error, you have entered a quantity of " + addQty + " which is greater than what is in stock (" + invQty + "). Please enter a different quantity.");
         }
         else
         {
+            alert("Item added to cart!");
             parent.location = "/Home/Add/@Model.itemID/" + addQty;
         }
     }
@@ -48,13 +47,15 @@
             <strong>NEW! </strong>
         }
         @Model.detailedDescription
+
     <p class="pricing">
     @if (Model.discountPrice > 0)
     {
         <i style="text-decoration: line-through; margin-right: 1.0em;">$@Model.discountPrice USD</i><strong>Now </strong>
     }
-        $@Model.price USD
+    $@Model.price USD
     </p>
+    
     @{ if (Model.quantity < 1)
         {
            <p>Out of Stock</p>

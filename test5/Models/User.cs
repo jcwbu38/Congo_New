@@ -20,6 +20,8 @@ namespace test5.Models
 
         public string Address2 { get; set; }
 
+        public string City { get; set; }
+
         [StringLength(2)]
         public string State { get; set; }
 

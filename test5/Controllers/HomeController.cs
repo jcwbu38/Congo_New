@@ -13,6 +13,7 @@ namespace test5.Controllers
     public class HomeController : Controller
     {
         private readonly InventoryContext _context;
+        public static List<Models.ShoppingCart.ShoppingCart> shoppingCart = new List<Models.ShoppingCart.ShoppingCart>();
 
         public HomeController(InventoryContext context)
         {
@@ -43,7 +44,7 @@ namespace test5.Controllers
             return View(inventory);
         }
 
-        public async Task<ActionResult> Add(int? id, int qty)
+        public async Task<IActionResult> Add(int? id, int qty)
         {
             if (id == null)
             {
@@ -57,16 +58,29 @@ namespace test5.Controllers
                 return NotFound();
             }
 
-            var newCart = new Models.ShoppingCart.Cart() {
+            var newItemToCart = new Models.ShoppingCart.ShoppingCart() {
                 id = inventory.itemID,
                 price = inventory.price,
                 description = inventory.description,
                 discountPrice = inventory.discountPrice,
                 image = inventory.image,
                 inventoryQuantity = inventory.quantity,
-                cartQuantity = qty };
+                cartQuantity = qty 
+            };
 
-            return RedirectToAction("Index", "ShoppingCart", newCart);
+            shoppingCart.Add(newItemToCart);
+            var item = await _context.Inventory
+                .SingleOrDefaultAsync(m => m.itemID == id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            // Would like to reload the Product Details page instead of going to shopping cart
+            // Update product quantity
+
+            //return RedirectToAction("Index", "ProductDetails", newItemToCart.id);
+            return RedirectToAction("Index", "ShoppingCart", newItemToCart);
 
         }
 
