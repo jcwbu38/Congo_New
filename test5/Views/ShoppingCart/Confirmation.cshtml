@@ -1,14 +1,14 @@
 ﻿@model test5.ViewModels.CheckoutViewModel;
 @{
-    ViewBag.Title = "Checkout";
+    ViewBag.Title = "Confirmation";
 }
 
 <!-- Display general product info here... -->
 <div>
     <br />
-    <h1>Checkout</h1>
+    <h1> Thank you for your purchase</h1>
     <br>
-    <h4>Customer Information:</h4> 
+    <h4>Order Conformation:</h4> 
     <br>@Model.User.First @Model.User.Last
     <br>@Model.User.Address1
     <br>@Model.User.City, @Model.User.State
@@ -16,7 +16,7 @@
     <br>@Model.User.Email
     <br>
     <br>
-    <li class="checkout">
+    <li class="confirmation">
         @foreach (var item in Model.ShoppingCart)
         {
             <ul>
@@ -32,9 +32,4 @@
             </ul>
         }
     </li>
-
-    <h4>Payment Information</h4>
-    <div>
-        <button class="confirmation">@Html.ActionLink("Purchase", "Confirmation", "ShoppingCart")</button>
-    </div>
 </div>

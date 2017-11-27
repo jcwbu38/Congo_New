@@ -28,17 +28,17 @@ namespace test5.Migrations.PurchaseOrder
 
                     b.Property<string>("address2");
 
-                    b.Property<string>("customerFirstName");
-
-                    b.Property<int>("customerID");
-
-                    b.Property<string>("customerLastName");
+                    b.Property<string>("city");
 
                     b.Property<DateTime>("datePurchased");
 
                     b.Property<string>("email");
 
-                    b.Property<int>("productID");
+                    b.Property<string>("firstName");
+
+                    b.Property<string>("lastName");
+
+                    b.Property<string>("productID");
 
                     b.Property<string>("productName");
 
@@ -47,6 +47,8 @@ namespace test5.Migrations.PurchaseOrder
                     b.Property<string>("state");
 
                     b.Property<string>("stowLocation");
+
+                    b.Property<int>("userID");
 
                     b.Property<int>("zip");
 
