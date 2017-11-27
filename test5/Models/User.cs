@@ -34,6 +34,19 @@ namespace test5.Models
         [EmailAddress]
         public string Email { get; set; }
 
+        [CreditCard]
+        public string CardNumber { get; set; }
+
+        [StringLength(4)]
+        public string ExpDate { get; set; }
+
+        [StringLength(50)]
+        public string NameOnCard { get; set; }
+
+        [StringLength(3)]
+        public string Svc { get; set; }
+
+
         
     }
 }
