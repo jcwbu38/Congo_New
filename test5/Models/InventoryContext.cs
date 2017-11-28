@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace test5.Models
 {
-    public class InventoryContext : DbContext
+    public class ReportingContext : DbContext
     {
-        public InventoryContext(DbContextOptions<InventoryContext> options)
+        public ReportingContext(DbContextOptions<ReportingContext> options)
             : base(options)
         {
         }
 
-        public DbSet<test5.Models.Inventory> Inventory { get; set; }
+        public DbSet<test5.Models.PurchaseOrder> PurchaseOrders { get; set; }
     }
 }

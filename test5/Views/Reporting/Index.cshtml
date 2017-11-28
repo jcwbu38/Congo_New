@@ -1,0 +1,323 @@
+﻿@model test5.ViewModels.ReportingViewModel;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Reporting Console</h2>
+<br>
+
+<h4>Shipping Today</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].userID)
+            </th>      
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].address2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].zip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].productID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].datePurchased)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].shipDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippingTodayPO[0].stowLocation)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.shippingTodayPO) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datePurchased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shipDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stowLocation)
+            </td>
+           
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h4>Outstanding Purchase Orders Not Shipped</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].userID)
+            </th>      
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].address2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].zip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].productID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].datePurchased)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].shipDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.outstandingPO[0].stowLocation)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.outstandingPO) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datePurchased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shipDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stowLocation)
+            </td>
+           
+        </tr>
+    }
+    </tbody>
+</table>
+
+<h4>Shipped Purchase Orders</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].userID)
+            </th>      
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].firstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].address1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].address2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].state)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].zip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].productID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].productName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].datePurchased)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].shipDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.shippedPO[0].stowLocation)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.shippedPO) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.userID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.zip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.productName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datePurchased)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.shipDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.stowLocation)
+            </td>
+           
+        </tr>
+    }
+    </tbody>
+</table>
