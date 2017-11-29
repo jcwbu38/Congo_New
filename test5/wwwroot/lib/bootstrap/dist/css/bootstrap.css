@@ -6899,3 +6899,29 @@ td.visible-print {
 .checkout {
     list-style: none;
 }
+
+.checkout label {
+    margin-right: 2em;
+}
+
+.checkout input {
+
+}
+
+.checkoutItemNum {
+    width: 10%;
+    text-align: left;
+}
+
+.checkoutItemDesc {
+    width: 70%;
+    text-wrap: normal;
+}
+
+.checkoutItemPrice {
+    width: 10%;
+}
+
+.checkoutItemQty {
+    width: 10%;
+}

@@ -8,31 +8,75 @@
     <br />
     <h1> Checkout</h1>
     <br>
-    <h4>Customer Information:</h4> 
-    <br>@Model.User.First @Model.User.Last
-    <br>@Model.User.Address1
-    <br>@Model.User.City, @Model.User.State
-    <br>@Model.User.Zip   
-    <br>@Model.User.Email
-    <br>
-    <br>
-    <li class="checkout">
-        @foreach (var item in Model.ShoppingCart)
-        {
-            <ul>
-                <p class="cartItemDesc">@item.description</p>
+    <h4>Customer Information:</h4>
+    <form asp-action="Create">
+
+        <div class="checkout">
+            <label asp-for="@Model.User.First" class="control-label"></label>
+            <input readonly asp-for="@Model.User.First" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="@Model.User.Last" class="control-label"></label>
+            <input readonly asp-for="@Model.User.Last" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="@Model.User.Address1" class="control-label"></label>
+            <input readonly asp-for="@Model.User.Address1" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="@Model.User.Address2" class="control-label"></label>
+            <input readonly asp-for="@Model.User.Address2" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="@Model.User.City" class="control-label"></label>
+            <input readonly asp-for="@Model.User.City" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="@Model.User.State" class="control-label"></label>
+            <input readonly asp-for="@Model.User.State" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="@Model.User.Zip" class="control-label"></label>
+            <input readonly asp-for="@Model.User.Zip" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="@Model.User.Email" class="control-label"></label>
+            <input readonly asp-for="@Model.User.Email" class="form-control" />
+        </div>
+
+        <div class="checkout">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+
+        <h4>Payment Information</h4>
+
+        <h4>Items to Purchase</h4>
+
+        <div class="form-group">
+            <label class="checkoutItemNum">Item #</label>
+            <label class="checkoutItemDesc">Descrption</label>
+            <label class="checkoutItemPrice">Price</label>
+            <label class="checkoutItemQty">Quantity</label>
+        </div>
+            @foreach (var item in Model.ShoppingCart)
+            {
+                <div class="form-group">
+                    <label class="checkoutItemNum"></label>
+                    <label class="checkoutItemDesc">@item.description</label>
                     @if (item.discountPrice > 0)
                     {
-                        <p class="pricing">$@item.discountPrice USD</p>
+                        <label class="checkoutItemPrice">$@item.discountPrice USD</label>
                     }
                     else
                     {
-                        <p class="pricing">$@item.price USD</p>
+                        <label class="checkoutItemPrice">$@item.price USD</label>
                     }
-            </ul>
-        }
-    </li>
+                    <label class="checkoutItemQty">@item.cartQuantity</label>
+                 </div>
+                <input asp-for="@item.id" class="form-control" />
 
-    <h4>Payment Information</h4>
+            }
+
+</form>
     
-</div>
+    
