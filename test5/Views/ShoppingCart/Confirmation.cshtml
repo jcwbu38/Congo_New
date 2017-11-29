@@ -1,0 +1,35 @@
+﻿@model test5.ViewModels.CheckoutViewModel;
+@{
+    ViewBag.Title = "Confirmation";
+}
+
+<!-- Display general product info here... -->
+<div>
+    <br />
+    <h1> Thank you for your purchase</h1>
+    <br>
+    <h4>Order Confirmation:</h4> 
+    <br>@Model.User.First @Model.User.Last
+    <br>@Model.User.Address1
+    <br>@Model.User.City, @Model.User.State
+    <br>@Model.User.Zip   
+    <br>@Model.User.Email
+    <br>
+    <br>
+    <li class="confirmation">
+        @foreach (var item in Model.ShoppingCart)
+        {
+            <ul>
+                <p class="cartItemDesc">@item.description</p>
+                    @if (item.discountPrice > 0)
+                    {
+                        <p class="pricing">$@item.discountPrice USD</p>
+                    }
+                    else
+                    {
+                        <p class="pricing">$@item.price USD</p>
+                    }
+            </ul>
+        }
+    </li>
+</div>

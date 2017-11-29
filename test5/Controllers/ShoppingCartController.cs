@@ -96,5 +96,28 @@ namespace test5.Controllers
                 return View("Index", products);
             }
         }
+
+        public IActionResult Confirmation()
+        {
+            var user = new User
+            {
+                First = "Cody",
+                Last = "Walters",
+                Id = 1234,
+
+                Address1 = "12438 SE 198th Place",
+                City = "Kent",
+                State = "Washington",
+                Zip = 98031,
+                Email = "jcw725@gmail.com"
+
+            };
+            var viewModel = new CheckoutViewModel
+            {
+                User = user,
+                ShoppingCart = products
+            };
+            return View("Confirmation", viewModel);
+        }
     }
 }

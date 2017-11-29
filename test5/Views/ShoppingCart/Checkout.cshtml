@@ -6,7 +6,7 @@
 <!-- Display general product info here... -->
 <div>
     <br />
-    <h1> Checkout</h1>
+    <h1>Checkout</h1>
     <br>
     <h4>Customer Information:</h4>
     <form asp-action="Create">
@@ -79,4 +79,7 @@
 
 </form>
     
-    
+    <h4>Payment Information</h4>
+    <div>
+        <button class="confirmation">@Html.ActionLink("Purchase", "Confirmation", "ShoppingCart")</button>
+    </div>    
