@@ -9,6 +9,14 @@
 <div class="product">
     <br />
     <h1> All Products</h1>
+    
+    <form asp-controller="Home" asp-action="Index">
+    <p>
+        Title: <input type="text" name="SearchString">
+        <input type="submit" value="Filter" />
+    </p>
+    </form>
+    
     <li>
         @foreach (var product in Model)
         {
