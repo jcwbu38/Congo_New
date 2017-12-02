@@ -21,9 +21,19 @@ namespace test5.Controllers
         }
 
         // GET: Inventory
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Inventory.ToListAsync());
+            var products = from m in _context.Inventory
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.description.Contains(searchString));
+            }
+
+            return View(await products.ToListAsync());
+
+            //return View(await _context.Inventory.ToListAsync());
         }
 
         // GET: Inventory/Details/5

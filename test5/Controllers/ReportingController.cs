@@ -27,8 +27,8 @@ namespace test5.Models
                          select m;
 
             // Select purchase orders that have not been shipped
-            var outstandingPO = purchaseOrders.Where(s => s.shipDate > DateTime.Now);
-            var shippedPO = purchaseOrders.Where(s => s.shipDate < DateTime.Now);
+            var outstandingPO = purchaseOrders.Where(s => s.shipDate.Date > DateTime.Now.Date);
+            var shippedPO = purchaseOrders.Where(s => s.shipDate.Date < DateTime.Now.Date);
             var shippingTodayPO = purchaseOrders.Where(s => s.shipDate.Date == DateTime.Now.Date);
 
             var reportingVM = new ReportingViewModel();
