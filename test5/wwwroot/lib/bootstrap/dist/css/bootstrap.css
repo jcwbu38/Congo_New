@@ -6908,20 +6908,26 @@ td.visible-print {
 
 }
 
+.checkoutItemList {
+    white-space: nowrap;
+    display: inline-block;
+    overflow-y: scroll;
+    max-width: 20em;
+}
 .checkoutItemNum {
-    width: 10%;
     text-align: left;
 }
 
 .checkoutItemDesc {
-    width: 70%;
     text-wrap: normal;
+    text-align: left;
 }
 
 .checkoutItemPrice {
-    width: 10%;
+    text-align: left;
 }
 
 .checkoutItemQty {
-    width: 10%;
+    text-align: left;
 }
+

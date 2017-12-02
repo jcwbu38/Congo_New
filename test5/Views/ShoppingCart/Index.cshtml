@@ -1,4 +1,4 @@
-﻿@using test5.Models.ShoppingCart;
+﻿@using test5.Models;
 
 @{
     ViewBag.Title = "Shopping Cart";
@@ -23,72 +23,88 @@
         if ( itemQty > stockQty ) // Requirement 3.2.8.3.2
         {
             alert("Sorry, you cannot purchase " + itemQty + " because there are only " + stockQty + " in stock.");
-            document.getElementById("qty_" + itemID).value = stockQty;
+            location.reload();
         }
         else
             parent.location = "/ShoppingCart/Update/" + itemID + "/" + itemQty;
 
     }
+
+    function Checkout()
+    {
+        parent.location = "/ShoppingCart/Checkout";
+    }
 </script>
 <br />
 <h1>Shopping Cart</h1>
 @{
-    var totalPrice = 0.0;
-    var totalQty = 0;
-    <div class="form-group">
-        <label class="cartItemNum">Item #</label>
-        <label class="cartItemDesc">Descrption</label>
-        <label class="cartItemImg">Image</label>
-        <label class="cartItemPrice">Price</label>
-        <label class="cartItemQty">Quantity</label>
-        <label class="cartItemUpdate">Update</label>
-    </div>
-    var  count = 1;
-    foreach ( var item in Model)
+    if (Model.Count < 1)
     {
-        <div class="form-group">
-            <label class="cartItemNum">@count</label>
-            <label class="cartItemDesc">@item.description</label>
-            <img class="cartItemImg" src="@item.image"></img>
-            @if(item.discountPrice > 0 && !String.IsNullOrEmpty(item.discountCode) )
-            {
-                <label class="cartItemPrice" id="disc_@item.id">$@item.discountPrice USD Discount Code: @item.discountCode</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
-            }
-            else if (item.discountPrice > 0 )
-            {
-                <label class="cartItemPrice" id="disc_@item.id">$@item.discountPrice USD</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
-            }
-            else
-            {
-                <label class="cartItemPrice">$@item.price USD</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
-            }
-            
-            <textarea class="cartItemQty" id="qty_@item.id" >@item.cartQuantity</textarea> <!-- requirement 3.2.11.3.2 -->
-            <input type="hidden" id="stock_@item.id" value="@item.inventoryQuantity"/>
-            <button class="cartItemUpdate" onclick="updateCart(@item.id);">Update</button>
-            
-        </div>
-        ++count;
-        totalPrice += item.discountPrice > 0 ? item.discountPrice : item.price;
-        totalQty += item.cartQuantity;
+        <h3> The cart is empty.</h3>
+
     }
-    <br />
-    <div style="text-align: center;">
-        <label class="cartItemNum"></label>
-        <label class="cartItemDesc"></label>
-        <label class="cartItemImg"></label>
-        <label class="cartItemPrice">$@totalPrice USD</label> <!-- requirement 3.2.11.3.2, 3.4.2, 3.5.1.2  -->
-        <label class="cartItemQty">@totalQty</label> <!-- requirement 3.2.11.3.2 -->
-        <label class="cartItemUpdate">Total</label>
-    </div>
-    <br />
-    <div>
-        <label >Discount Code: </label>
-        <textarea class="cartDiscCode" id="discountCode" ></textarea>
-        <button onclick="applyDiscount();">Apply</button>
-    </div>
-    <div>
-        <button class="cartCheckout">@Html.ActionLink("Checkout", "Checkout", "ShoppingCart")</button>
-    </div>
+    else
+    {
+        var totalPrice = 0.0;
+        var totalQty = 0;
+        <div class="form-group">
+            <label class="cartItemNum">Item #</label>
+            <label class="cartItemDesc">Descrption</label>
+            <label class="cartItemImg">Image</label>
+            <label class="cartItemPrice">Price</label>
+            <label class="cartItemQty">Quantity</label>
+            <label class="cartItemUpdate">Update</label>
+        </div>
+            var count = 0;
+            foreach (var item in Model)
+            {
+                ++count;
+            <div class="form-group">
+                <label class="cartItemNum">@count</label>
+                <label class="cartItemDesc">@item.description</label>
+                <img class="cartItemImg" src="@item.image"></img>
+                @if (item.discountPrice > 0 && !String.IsNullOrEmpty(item.discountCode))
+                {
+                    <label class="cartItemPrice" id="disc_@item.id">$@item.discountPrice USD Discount Code: @item.discountCode</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
+                }
+                else if (item.discountPrice > 0)
+                {
+                    <label class="cartItemPrice" id="disc_@item.id">$@item.discountPrice USD</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
+                }
+                else
+                {
+                    <label class="cartItemPrice">$@item.price USD</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
+                }
+            
+                <textarea class="cartItemQty" id="qty_@item.id" >@item.cartQuantity</textarea> <!-- requirement 3.2.11.3.2 -->
+                <input type="hidden" id="stock_@item.id" value="@item.inventoryQuantity"/>
+                <button class="cartItemUpdate" onclick="updateCart(@item.id);">Update</button>
+            
+            </div>
+
+                totalPrice += item.discountPrice > 0 ? item.discountPrice : item.price;
+                totalQty += item.cartQuantity;
+            }
+        <br />
+        <div style="text-align: center;">
+            <label class="cartItemNum"></label>
+            <label class="cartItemDesc"></label>
+            <label class="cartItemImg"></label>
+            <label class="cartItemPrice">$@totalPrice USD</label> <!-- requirement 3.2.11.3.2, 3.4.2, 3.5.1.2  -->
+            <label class="cartItemQty">@totalQty</label> <!-- requirement 3.2.11.3.2 -->
+            <label class="cartItemUpdate">Total</label>
+        </div>
+
+        <br />
+        <div>
+            <label >Discount Code: </label>
+            <textarea class="cartDiscCode" id="discountCode" ></textarea>
+            <button onclick="applyDiscount();">Apply</button>
+        </div>
+        <br />
+        <div>
+            <button class="btn btn-primary" onclick="Checkout();">Checkout</button>
+        </div>
+    }
     <br style="float: none;"/>
 }

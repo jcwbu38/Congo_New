@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using test5.Models;
-using test5.Models.ShoppingCart;
 using test5.ViewModels;
+using System.Threading.Tasks;
 
 namespace test5.Controllers
 {
     public class ShoppingCartController : Controller
     {
-        public static List<Models.ShoppingCart.ShoppingCart> products = new List<Models.ShoppingCart.ShoppingCart>();
+        public static List<Models.ShoppingCart> products = new List<Models.ShoppingCart>();
         private static Dictionary<string, double> discountCodes = new Dictionary<string, double>() { { "Cody", 0.65 }, { "Derek", 0.60 }, { "Jon", 0.50 } };
         // Need a variable here to store current user
 
@@ -18,7 +18,7 @@ namespace test5.Controllers
         {
             if (newCart.price > 0)
             {
-                foreach( var item in products)
+                foreach (var item in products)
                 {
                     if (newCart.id == item.id)
                         return View(products);
@@ -37,7 +37,7 @@ namespace test5.Controllers
                 {
                     if (qty < 1) // requirement 3.5.1.1 
                         products.Remove(item);
-                    else if ( qty <= item.inventoryQuantity )
+                    else if (qty <= item.inventoryQuantity)
                         item.cartQuantity = qty;
 
                     return View("Index", products);
@@ -61,63 +61,94 @@ namespace test5.Controllers
                     {
                         item.discountPrice = item.price * code.Value;
                         item.discountCode = code.Key;
-                        return View("Index", products);
                     }
+                    return View("Index", products);
                 }
             }
             return Content("Error, discount code is invalid");
         }
 
+        // This method handles retreiving and displaying the user and shipping information for the order.
         public IActionResult Checkout()
         {
-            if (products.Count() > 0) {
+            if (products.Count() > 0)
+            {
                 var user = new User
                 {
-                    First = "Cody",
-                    Last = "Walters",
                     Id = 1234,
+                    First = "Test",
+                    Last = "Account",
 
                     Address1 = "12438 SE 198th Place",
-                    City = "Kent",
-                    State = "Washington",
+                    City = "Test",
+                    State = "TX",
                     Zip = 98031,
-                    Email = "jcw725@gmail.com"
-                        
+                    Phone = "1234567890",
+                    Email = "me@you.com",
+
+                    CardNumber = "1414045612216589",
+                    ExpDate = "1215",
+                    NameOnCard = "T. Account",
+                    Svc = "123"
                 };
+
+                var shippingInfo = new User();
+
                 var viewModel = new CheckoutViewModel
                 {
                     User = user,
+                    ShippingInfo = shippingInfo,
                     ShoppingCart = products
                 };
                 return View(viewModel);
-
             }
-            else {
+            else
+            {
                 return View("Index", products);
             }
         }
 
-        public IActionResult Confirmation()
+        // This method handles displaying the complete order information for the customer to confirm before the order is placed.
+        public IActionResult Confirmation(CheckoutViewModel order)
         {
+            // Verify the information
             var user = new User
             {
-                First = "Cody",
-                Last = "Walters",
-                Id = 1234,
+                First = order.User.First,
+                Last = order.User.Last,
 
-                Address1 = "12438 SE 198th Place",
-                City = "Kent",
-                State = "Washington",
-                Zip = 98031,
-                Email = "jcw725@gmail.com"
+                //Id = order.User.Id,
 
+                Address1 = order.User.Address1,
+                City = order.User.City,
+                State = order.User.State,
+                Zip = order.User.Zip,
+                Phone = order.User.Phone,
+                Email = order.User.Email,
+
+                CardNumber = order.User.CardNumber,
+                ExpDate = order.User.ExpDate,
+                NameOnCard = order.User.NameOnCard,
+                Svc = order.User.Svc
+            };
+
+            var shippingInfo = new User
+            {
+                First = order.ShippingInfo.First,
+                Last = order.ShippingInfo.Last,
+                Address1 = order.ShippingInfo.Address1,
+                City = order.ShippingInfo.City,
+                State = order.ShippingInfo.State,
+                Zip = order.ShippingInfo.Zip,
             };
             var viewModel = new CheckoutViewModel
             {
                 User = user,
+                ShippingInfo = shippingInfo,
                 ShoppingCart = products
             };
-            return View("Confirmation", viewModel);
+
+            return View(viewModel);
         }
     }
 }

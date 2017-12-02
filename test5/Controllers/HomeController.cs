@@ -13,7 +13,7 @@ namespace test5.Controllers
     public class HomeController : Controller
     {
         private readonly InventoryContext _context;
-        public static List<Models.ShoppingCart.ShoppingCart> shoppingCart = new List<Models.ShoppingCart.ShoppingCart>();
+        public static List<ShoppingCart> shoppingCart = new List<ShoppingCart>();
 
         public HomeController(InventoryContext context)
         {
@@ -58,14 +58,16 @@ namespace test5.Controllers
                 return NotFound();
             }
 
-            var newItemToCart = new Models.ShoppingCart.ShoppingCart() {
+            var newItemToCart = new ShoppingCart() {
                 id = inventory.itemID,
                 price = inventory.price,
                 description = inventory.description,
                 discountPrice = inventory.discountPrice,
                 image = inventory.image,
                 inventoryQuantity = inventory.quantity,
-                cartQuantity = qty 
+                cartQuantity = qty, 
+                stowLocation = inventory.locationID,
+                productName = inventory.itemName
             };
 
             shoppingCart.Add(newItemToCart);

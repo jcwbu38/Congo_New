@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using test5.Models;
+using test5.ViewModels;
 
 namespace test5.Controllers
 {
@@ -142,6 +143,40 @@ namespace test5.Controllers
             _context.PurchaseOrder.Remove(purchaseOrder);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> CreatePO(CheckoutViewModel order )
+        {
+            foreach (var item in ShoppingCartController.products)
+            {
+                PurchaseOrder po = new PurchaseOrder
+                {
+                    ID = await _context.PurchaseOrder.CountAsync(),
+                    userID = order.User.Id,
+                    firstName = order.ShippingInfo.First,
+                    lastName = order.ShippingInfo.Last,
+                    address1 = order.ShippingInfo.Address1,
+                    address2 = order.ShippingInfo.Address2,
+                    city = order.ShippingInfo.City,
+                    state = order.ShippingInfo.State,
+                    zip = order.ShippingInfo.Zip,
+                    email = order.User.Email,
+                    //need phone#
+
+                    productID = item.id.ToString(),
+                    productName = item.productName,
+                    datePurchased = DateTime.Now,
+                    stowLocation = item.stowLocation
+                };
+
+                _context.Add(po);
+                await _context.SaveChangesAsync();
+            }
+
+            ShoppingCartController.products.Clear();
+
+
+            return View("OrderPlaced");
         }
 
         private bool PurchaseOrderExists(int id)
