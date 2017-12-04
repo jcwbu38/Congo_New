@@ -20,7 +20,7 @@
         var itemQty = parseInt(document.getElementById("qty_" + itemID).value);
         var stockQty = parseInt(document.getElementById("stock_" + itemID).value);
 
-        if ( itemQty > stockQty ) // Requirement 3.2.8.3.2
+        if ( itemQty > stockQty ) // Requirement 3.2.8.3.2, 3.2.9.3.2
         {
             alert("Sorry, you cannot purchase " + itemQty + " because there are only " + stockQty + " in stock.");
             location.reload();
@@ -28,6 +28,11 @@
         else
             parent.location = "/ShoppingCart/Update/" + itemID + "/" + itemQty;
 
+    }
+
+    function emptyCart()
+    {
+        parent.location = "/ShoppingCart/Empty/";
     }
 
     function Checkout()
@@ -63,6 +68,7 @@
                 <label class="cartItemNum">@count</label>
                 <label class="cartItemDesc">@item.description</label>
                 <img class="cartItemImg" src="@item.image"></img>
+                <!-- requirement 3.2.9.3.1 -->
                 @if (item.discountPrice > 0 && !String.IsNullOrEmpty(item.discountCode))
                 {
                     <label class="cartItemPrice" id="disc_@item.id">$@item.discountPrice USD Discount Code: @item.discountCode</label> <!-- requirement 3.2.8.3.1, 3.2.11.3.2, 3.4.2 -->
@@ -86,6 +92,7 @@
                 totalQty += item.cartQuantity;
             }
         <br />
+        <p style="border-top: 1px solid #8c8b8b;" />
         <div style="text-align: center;">
             <label class="cartItemNum"></label>
             <label class="cartItemDesc"></label>
@@ -94,6 +101,9 @@
             <label class="cartItemQty">@totalQty</label> <!-- requirement 3.2.11.3.2 -->
             <label class="cartItemUpdate">Total</label>
         </div>
+        <p style="border-top: 1px solid #8c8b8b;" />
+        <br />
+        <button class="cartCheckout" onclick="emptyCart();">Remove All</button>
 
         <br />
         <div>

@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* HomeController.cs
+ * This contoller provides access to the portal's main page as well as the product details pages and adding items to the shopping cart. 
+ * This file covers design requirements 4.1 - 4.7, 4.14, and 4.17.
+
+*/
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,23 +25,20 @@ namespace test5.Controllers
             _context = context;
         }
 
-        // GET: Inventory
+        // GET: Inventory - Retrieves data for the main webpage view and sends it to Index.cshtml for formatting. Also handles search queries.
         public async Task<IActionResult> Index(string searchString)
         {
-            var products = from m in _context.Inventory
-                         select m;
+            var products = from m in _context.Inventory select m;
 
-            if (!String.IsNullOrEmpty(searchString))
+            if (!String.IsNullOrEmpty(searchString)) // section 4.17. requirement 3.2.15.3.1
             {
-                products = products.Where(s => s.description.Contains(searchString));
+                products = products.Where(s => s.description.ToUpper().Contains(searchString.ToUpper()));
             }
 
             return View(await products.ToListAsync());
-
-            //return View(await _context.Inventory.ToListAsync());
         }
 
-        // GET: Inventory/Details/5
+        // GET: Inventory/Details/ - Retrieves data for the specified item by ID and sends it to ProductDetails.cshtml for formatting.
         public async Task<IActionResult> ProductDetails( int? id )
         {
             if (id == null)
@@ -44,8 +46,8 @@ namespace test5.Controllers
                 return NotFound();
             }
 
-            var inventory = await _context.Inventory
-                .SingleOrDefaultAsync(m => m.itemID == id);
+            var inventory = await _context.Inventory.SingleOrDefaultAsync(m => m.itemID == id);
+
             if (inventory == null)
             {
                 return NotFound();
@@ -54,6 +56,7 @@ namespace test5.Controllers
             return View(inventory);
         }
 
+        // Add: ShoppingCart/Index/Item - Adds an item to the shopping cart based on the item ID and the quantity specified (Section 4.17).
         public async Task<IActionResult> Add(int? id, int qty)
         {
             if (id == null)
@@ -61,8 +64,8 @@ namespace test5.Controllers
                 return NotFound();
             }
 
-            var inventory = await _context.Inventory
-                .SingleOrDefaultAsync(m => m.itemID == id);
+            var inventory = await _context.Inventory.SingleOrDefaultAsync(m => m.itemID == id);
+
             if (inventory == null)
             {
                 return NotFound();
@@ -81,19 +84,15 @@ namespace test5.Controllers
             };
 
             shoppingCart.Add(newItemToCart);
-            var item = await _context.Inventory
-                .SingleOrDefaultAsync(m => m.itemID == id);
+
+            var item = await _context.Inventory.SingleOrDefaultAsync(m => m.itemID == id);
+
             if (item == null)
             {
                 return NotFound();
             }
 
-            // Would like to reload the Product Details page instead of going to shopping cart
-            // Update product quantity
-
-            //return RedirectToAction("Index", "ProductDetails", newItemToCart.id);
             return RedirectToAction("Index", "ShoppingCart", newItemToCart);
-
         }
 
         public IActionResult About()

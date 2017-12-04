@@ -1,3 +1,7 @@
+/* UserController.cs
+ * This contoller provides access to the user database for update.
+ * 
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;

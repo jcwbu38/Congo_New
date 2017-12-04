@@ -1,3 +1,7 @@
+/* PurchaseOrderController.cs
+ * This contoller provides access to the PO database for updating.
+ * 
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -145,36 +149,53 @@ namespace test5.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        // This method sends the payment infomation to a third party for processing. (section 2.7).
+        private int sendCCInfoForPayment(User ccInfo )
+        {
+            // The code to send the info off for payment would go here.
+            return 1;
+        }
+
+        // ShoppingCart/OrderPlaced - this method handles sending the credit card information for payment and creating the PO for the order.
         public async Task<IActionResult> CreatePO(CheckoutViewModel order )
         {
-            foreach (var item in ShoppingCartController.products)
+            //Send CC info for payment (section 2.6)
+            int paymentSuccess = sendCCInfoForPayment(order.User);
+
+            if (paymentSuccess == 1)
             {
-                PurchaseOrder po = new PurchaseOrder
+                foreach (var item in ShoppingCartController.products)
                 {
-                    ID = await _context.PurchaseOrder.CountAsync(),
-                    userID = order.User.Id,
-                    firstName = order.ShippingInfo.First,
-                    lastName = order.ShippingInfo.Last,
-                    address1 = order.ShippingInfo.Address1,
-                    address2 = order.ShippingInfo.Address2,
-                    city = order.ShippingInfo.City,
-                    state = order.ShippingInfo.State,
-                    zip = order.ShippingInfo.Zip,
-                    email = order.User.Email,
-                    //need phone#
+                    PurchaseOrder po = new PurchaseOrder
+                    {
+                        ID = await _context.PurchaseOrder.CountAsync(),
+                        userID = order.User.Id,
+                        firstName = order.ShippingInfo.First,
+                        lastName = order.ShippingInfo.Last,
+                        address1 = order.ShippingInfo.Address1,
+                        address2 = order.ShippingInfo.Address2,
+                        city = order.ShippingInfo.City,
+                        state = order.ShippingInfo.State,
+                        zip = order.ShippingInfo.Zip,
+                        email = order.User.Email,
+                        //need phone#
 
-                    productID = item.id.ToString(),
-                    productName = item.productName,
-                    datePurchased = DateTime.Now,
-                    stowLocation = item.stowLocation
-                };
+                        productID = item.id.ToString(),
+                        productName = item.productName,
+                        datePurchased = DateTime.Now,
+                        stowLocation = item.stowLocation
+                    };
 
-                _context.Add(po);
-                await _context.SaveChangesAsync();
+                    _context.Add(po);
+                    await _context.SaveChangesAsync();
+                }
+
+                ShoppingCartController.products.Clear();
             }
-
-            ShoppingCartController.products.Clear();
-
+            else
+            {
+                return View("ProcessingError");
+            }
 
             return View("OrderPlaced");
         }

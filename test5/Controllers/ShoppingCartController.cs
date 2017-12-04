@@ -1,4 +1,9 @@
-﻿using System;
+﻿/* ShoppingCartController.cs
+ * This contoller provides access to the the shopping cart as well accepting the PO information and sending it to the PurchaseOrderController.
+ * This file covers design requirements 4.13 - 4.16, 4.14.
+
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
@@ -28,39 +33,45 @@ namespace test5.Controllers
             return View(products);
         }
 
+        // ShoppingCart/Index - this method updates an item in the shopping cart based on the item ID and the quantity. (section 4.14, 4.15)  
         public IActionResult Update(int id, int qty)
         {
-
             foreach (var item in products)
             {
                 if (id == item.id)
                 {
-                    if (qty < 1) // requirement 3.5.1.1 
+                    if (qty < 1) // requirement 3.5.1.1
                         products.Remove(item);
-                    else if (qty <= item.inventoryQuantity)
+                    else if (qty <= item.inventoryQuantity) // requirement 3.2.9.3.2 
                         item.cartQuantity = qty;
 
                     return View("Index", products);
                 }
             }
-
             return View("Index", products);
         }
 
-        // requirement 3.2.9.3.1
+        // ShoppingCart/Index - this method applies a dscount code (if valid) to the items in the shopping cart. (section 4.16, requirement 3.2.9.3.1).
         public IActionResult Discount(string id)
         {
             if (String.IsNullOrEmpty(id))
                 return Content("Error, discount code is invalid");
-
+            // requirement 3.2.9.3.1
             foreach (var code in discountCodes)
             {
                 if (id.Equals(code.Key)) //TODO check code for validity
                 {
                     foreach (var item in products)
                     {
-                        item.discountPrice = item.price * code.Value;
-                        item.discountCode = code.Key;
+                        if (item.discountPrice == 0)
+                        {
+                            item.discountPrice = item.price * code.Value;
+                            item.discountCode = code.Key;
+                        }
+                        else
+                        {
+                            item.discountCode = "Already on clearance.";
+                        }
                     }
                     return View("Index", products);
                 }
@@ -68,7 +79,13 @@ namespace test5.Controllers
             return Content("Error, discount code is invalid");
         }
 
-        // This method handles retreiving and displaying the user and shipping information for the order.
+        public IActionResult Empty()
+        {
+            products.Clear();
+            return View();
+        }
+
+        // ShoppingCart/Checkout - This method handles retreiving and displaying the user and shipping information for the order.
         public IActionResult Checkout()
         {
             if (products.Count() > 0)
@@ -108,16 +125,14 @@ namespace test5.Controllers
             }
         }
 
-        // This method handles displaying the complete order information for the customer to confirm before the order is placed.
+        // ShoppingCart/Confirmation - This method handles displaying the complete order information for the customer to confirm before the order is placed.
         public IActionResult Confirmation(CheckoutViewModel order)
         {
-            // Verify the information
+            // Gather the user, shipping, and cart information to display for the customer to confirm.
             var user = new User
             {
                 First = order.User.First,
                 Last = order.User.Last,
-
-                //Id = order.User.Id,
 
                 Address1 = order.User.Address1,
                 City = order.User.City,
@@ -141,6 +156,7 @@ namespace test5.Controllers
                 State = order.ShippingInfo.State,
                 Zip = order.ShippingInfo.Zip,
             };
+
             var viewModel = new CheckoutViewModel
             {
                 User = user,

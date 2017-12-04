@@ -6898,6 +6898,7 @@ td.visible-print {
 
 .checkout {
     list-style: none;
+    width: 50%;
 }
 
 .checkout label {

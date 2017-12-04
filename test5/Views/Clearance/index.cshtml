@@ -3,10 +3,18 @@
     ViewBag.Title = "Clearance Items";
 }
 
-<!-- Display general product info here... -->
+<!-- Display clearance product info here... requirement 3.2.10.3.1 -->
 <div class="product">
     <br />
     <h1> Clearance</h1>
+
+    <!-- Search Bar  (requirement 3.2.15.3.1) -->
+    <form asp-controller="Home" asp-action="Index">
+        <p>
+            Title: <input type="text" name="SearchString">
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
     <li>
         @foreach (var product in Model)
         {
@@ -17,11 +25,11 @@
                         <a href="/Home/ProductDetails/@product.itemID">
                             <img src="@product.image" />
                             <p class="prod_desc">@product.description</p>
-                            <i style="text-decoration: line-through; margin-right: 1.0em;">$@product.discountPrice USD</i> <!-- requirement 3.2.8.3.1 -->
-                            <strong>Now $@product.price USD</strong> <!-- requirement 3.2.8.3.1, 3.4.2 -->
+                            <i style="text-decoration: line-through; margin-right: 1.0em;">$@product.price USD</i> <!-- requirement 3.2.8.3.1 -->
+                            <strong>Now $@product.discountPrice USD</strong> <!-- requirement 3.2.8.3.1, 3.4.2 -->
                         </a>
                     </ul>
-                }
+            }
         }
     </li>
 </div>

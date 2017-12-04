@@ -87,7 +87,7 @@
             <td class="confTableRowData">@Model.ShippingInfo.State</td>
         </tr>
         <tr>
-            <td class="confTableRowName">Zip Code</tdclass="confTableRowName">
+            <td class="confTableRowName">Zip Code</td>
             <td class="confTableRowData">@Model.User.Zip</td>
             <td class="confTableRowData">@Model.ShippingInfo.Zip</td>
         </tr>
@@ -140,15 +140,15 @@
             <label class="checkoutItemDesc">@Cart.description</label>
         @if (Cart.discountPrice > 0)
         {
-            <label class="checkoutItemPrice">$@Cart.discountPrice USD</label>
+            <label class="checkoutItemPrice">$@Cart.discountPrice USD</label> <!-- requirement 3.2.8.3.1, 3.4.2 -->
             totalPrice += Cart.discountPrice;
         }
         else
         {
-            <label class="checkoutItemPrice">$@Cart.price USD</label>
+            <label class="checkoutItemPrice">$@Cart.price USD</label> <!-- requirement 3.2.8.3.1, 3.4.2 -->
             totalPrice += Cart.price;
         }
-            <label class="checkoutItemQty">@Cart.cartQuantity</label>
+            <label class="checkoutItemQty">@Cart.cartQuantity</label> <!-- requirement 3.2.11.3.2 -->
         </div>
         count++;
         totalQty += Cart.cartQuantity;
@@ -158,8 +158,8 @@
     <div>
         <label class="checkoutItemNum"></label>
         <label class="checkoutItemDesc">Total</label>
-        <label class="checkoutItemPrice">$@totalPrice USD</label>
-        <label class="checkoutItemQty">@totalQty</label>
+        <label class="checkoutItemPrice">$@totalPrice USD</label> <!-- requirement 3.2.8.3.1, 3.4.2 -->
+        <label class="checkoutItemQty">@totalQty</label> <!-- requirement 3.2.11.3.2 -->
     </div>
 
     <form action="/PurchaseOrder/CreatePO" method="post">

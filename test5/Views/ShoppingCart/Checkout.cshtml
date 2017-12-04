@@ -32,7 +32,8 @@
     <br />
     <h1>Checkout</h1>
     <br>
-    <h4>Customer Information</h4>
+    <h3>Billing Information</h3>
+    <p style="border-top: 1px solid #8c8b8b;" />
     <form asp-action="Confirmation">
 
         <div class="checkout">
@@ -45,77 +46,80 @@
             <input asp-for="User.Last" id="uLast" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="User.Address1" class="control-label">Billing Address 1</label>
+            <label asp-for="User.Address1" class="control-label">Address 1</label>
             <input asp-for="User.Address1" id="uAddress1" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="User.Address2" class="control-label">Billing Address 2</label>
+            <label asp-for="User.Address2" class="control-label">Address 2</label>
             <input asp-for="User.Address2" id="uAddress2" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="User.City" class="control-label">Billing City</label>
+            <label asp-for="User.City" class="control-label">City</label>
             <input asp-for="User.City" id="uCity" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="User.State" class="control-label">Billing State (two letter abbreviation)</label>
+            <label asp-for="User.State" class="control-label">State (two letter abbreviation)</label>
             <input asp-for="User.State" id="uState" maxlength="2" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="User.Zip" class="control-label">Billing Zip Code</label>
+            <label asp-for="User.Zip" class="control-label">Zip Code</label>
             <input asp-for="User.Zip" id="uZip" maxlength="5" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="User.Phone" class="control-label">Billing Phone #</label>
+            <label asp-for="User.Phone" class="control-label">Phone #</label>
             <input asp-for="User.Phone" class="form-control" />
         </div>
         <div class="checkout">
             <label asp-for="User.Email" class="control-label"></label>
             <input asp-for="User.Email" class="form-control" />
         </div>
+        <br />
+        <h3>Shipping Information</h3>
+        <p style="border-top: 1px solid #8c8b8b;" />
 
-        <h4>Shipping Information</h4>
-
-        Same as customer info <input type="checkbox" id="shipping_info" onchange="updateShippingAddress();" />
+        <div style="font-size: medium;">Same as customer info &nbsp;&nbsp; <input type="checkbox" id="shipping_info" onchange="updateShippingAddress();" /></div>
+        <br />
 
         <div class="checkout">
-            <label asp-for="ShippingInfo.First" class="control-label">Shipping First Name</label>
+            <label asp-for="ShippingInfo.First" class="control-label">First Name</label>
             <input asp-for="ShippingInfo.First" id="sFirst" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="ShippingInfo.Last" class="control-label">Shipping Last Name</label>
+            <label asp-for="ShippingInfo.Last" class="control-label">Last Name</label>
             <input asp-for="ShippingInfo.Last" id="sLast" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="ShippingInfo.Address1" class="control-label">Shipping Address 1</label>
+            <label asp-for="ShippingInfo.Address1" class="control-label">Address 1</label>
             <input asp-for="ShippingInfo.Address1" id="sAddress1" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="ShippingInfo.Address2" class="control-label">Shipping Address 2</label>
+            <label asp-for="ShippingInfo.Address2" class="control-label">Address 2</label>
             <input asp-for="ShippingInfo.Address2" id="sAddress2" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="ShippingInfo.City" class="control-label">Shipping City</label>
+            <label asp-for="ShippingInfo.City" class="control-label">City</label>
             <input asp-for="ShippingInfo.City" id="sCity" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="ShippingInfo.State" class="control-label">Shipping State (two letter abbreviation)</label>
+            <label asp-for="ShippingInfo.State" class="control-label">State (two letter abbreviation)</label>
             <input asp-for="ShippingInfo.State" id="sState" maxlength="2" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="ShippingInfo.Zip" class="control-label">Shipping Zip Code</label>
+            <label asp-for="ShippingInfo.Zip" class="control-label">Zip Code</label>
             <input asp-for="ShippingInfo.Zip" id="sZip" maxlength="5" class="form-control" />
         </div>
+        <br />
 
-
-        <h4>Payment Information</h4>
+        <h3>Payment Information</h3>
+        <p style="border-top: 1px solid #8c8b8b;" />
 
         <div class="checkout">
             <label asp-for="User.CardNumber" class="control-label">Credit Card Number</label>
             <input asp-for="User.CardNumber" class="form-control" />
         </div>
         <div class="checkout">
-            <label asp-for="User.ExpDate" class="control-label">Expiriation Date</label>
-            <input asp-for="User.ExpDate" class="form-control" />
+            <label asp-for="User.ExpDate" class="control-label">Expiriation Date (mm/yy)</label>
+            <input asp-for="User.ExpDate" maxlength="5" class="form-control" />
         </div>
         <div class="checkout">
             <label asp-for="User.NameOnCard" class="control-label">Name on Card</label>
