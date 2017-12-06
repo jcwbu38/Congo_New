@@ -1,40 +1,138 @@
-﻿@model test5.ViewModels.CheckoutViewModel;
-@{
+﻿@model test5.ViewModels.CheckoutViewModel
+@{     
     ViewBag.Title = "Checkout";
 }
+<script>
+    function updateShippingAddress() {
+        var checked = document.getElementById("shipping_info").checked;
 
+        if (checked == true) {
+            document.getElementById("sFirst").value = document.getElementById("uFirst").value;
+            document.getElementById("sLast").value = document.getElementById("uLast").value;
+            document.getElementById("sAddress1").value = document.getElementById("uAddress1").value;
+            document.getElementById("sAddress2").value = document.getElementById("uAddress2").value;
+            document.getElementById("sCity").value = document.getElementById("uCity").value;
+            document.getElementById("sState").value = document.getElementById("uState").value;
+            document.getElementById("sZip").value = document.getElementById("uZip").value;
+        }
+        else {
+            document.getElementById("sFirst").value = "";
+            document.getElementById("sLast").value = "";
+            document.getElementById("sAddress1").value = "";
+            document.getElementById("sAddress2").value = "";
+            document.getElementById("sCity").value = "";
+            document.getElementById("sState").value = "";
+            document.getElementById("sZip").value = "";
+
+        }
+    }
+</script>
 <!-- Display general product info here... -->
 <div>
     <br />
     <h1>Checkout</h1>
     <br>
-    <h4>Customer Information:</h4> 
-    <br>@Model.User.First @Model.User.Last
-    <br>@Model.User.Address1
-    <br>@Model.User.City, @Model.User.State
-    <br>@Model.User.Zip   
-    <br>@Model.User.Email
-    <br>
-    <br>
-    <li class="checkout">
-        @foreach (var item in Model.ShoppingCart)
-        {
-            <ul>
-                <p class="cartItemDesc">@item.description</p>
-                    @if (item.discountPrice > 0)
-                    {
-                        <p class="pricing">$@item.discountPrice USD</p>
-                    }
-                    else
-                    {
-                        <p class="pricing">$@item.price USD</p>
-                    }
-            </ul>
-        }
-    </li>
+    <h3>Billing Information</h3>
+    <p style="border-top: 1px solid #8c8b8b;" />
+    <form asp-action="Confirmation">
 
-    <h4>Payment Information</h4>
-    <div>
-        <button class="confirmation">@Html.ActionLink("Purchase", "Confirmation", "ShoppingCart")</button>
-    </div>
+        <div class="checkout">
+            <input asp-for="User.Id" type="hidden" />
+            <label asp-for="User.First" class="control-label">First Name</label>
+            <input asp-for="User.First" id="uFirst" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.Last" class="control-label">Last Name</label>
+            <input asp-for="User.Last" id="uLast" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.Address1" class="control-label">Address 1</label>
+            <input asp-for="User.Address1" id="uAddress1" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.Address2" class="control-label">Address 2</label>
+            <input asp-for="User.Address2" id="uAddress2" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.City" class="control-label">City</label>
+            <input asp-for="User.City" id="uCity" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.State" class="control-label">State (two letter abbreviation)</label>
+            <input asp-for="User.State" id="uState" maxlength="2" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.Zip" class="control-label">Zip Code</label>
+            <input asp-for="User.Zip" id="uZip" maxlength="5" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.Phone" class="control-label">Phone #</label>
+            <input asp-for="User.Phone" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.Email" class="control-label"></label>
+            <input asp-for="User.Email" class="form-control" />
+        </div>
+        <br />
+        <h3>Shipping Information</h3>
+        <p style="border-top: 1px solid #8c8b8b;" />
+
+        <div style="font-size: medium;">Same as customer info &nbsp;&nbsp; <input type="checkbox" id="shipping_info" onchange="updateShippingAddress();" /></div>
+        <br />
+
+        <div class="checkout">
+            <label asp-for="ShippingInfo.First" class="control-label">First Name</label>
+            <input asp-for="ShippingInfo.First" id="sFirst" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="ShippingInfo.Last" class="control-label">Last Name</label>
+            <input asp-for="ShippingInfo.Last" id="sLast" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="ShippingInfo.Address1" class="control-label">Address 1</label>
+            <input asp-for="ShippingInfo.Address1" id="sAddress1" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="ShippingInfo.Address2" class="control-label">Address 2</label>
+            <input asp-for="ShippingInfo.Address2" id="sAddress2" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="ShippingInfo.City" class="control-label">City</label>
+            <input asp-for="ShippingInfo.City" id="sCity" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="ShippingInfo.State" class="control-label">State (two letter abbreviation)</label>
+            <input asp-for="ShippingInfo.State" id="sState" maxlength="2" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="ShippingInfo.Zip" class="control-label">Zip Code</label>
+            <input asp-for="ShippingInfo.Zip" id="sZip" maxlength="5" class="form-control" />
+        </div>
+        <br />
+
+        <h3>Payment Information</h3>
+        <p style="border-top: 1px solid #8c8b8b;" />
+
+        <div class="checkout">
+            <label asp-for="User.CardNumber" class="control-label">Credit Card Number</label>
+            <input asp-for="User.CardNumber" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.ExpDate" class="control-label">Expiriation Date (mm/yy)</label>
+            <input asp-for="User.ExpDate" maxlength="5" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.NameOnCard" class="control-label">Name on Card</label>
+            <input asp-for="User.NameOnCard" class="form-control" />
+        </div>
+        <div class="checkout">
+            <label asp-for="User.Svc" class="control-label">SVC</label>
+            <input asp-for="User.Svc" class="form-control" />
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="Next" class="btn btn-primary" />
+        </div>
+
+    </form>
 </div>

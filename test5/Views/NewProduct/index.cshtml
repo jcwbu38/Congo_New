@@ -5,10 +5,18 @@
     ViewBag.Title = "New Products";
 }
 
-<!-- Display general product info here... -->
+<!-- Display new product info here... requirement 3.2.10.3.1 -->
 <div class="product">
     <br />
     <h1> New Products</h1>
+
+    <!-- Search Bar  (requirement 3.2.15.3.1) -->
+    <form asp-controller="Home" asp-action="Index">
+        <p>
+            Title: <input type="text" name="SearchString">
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
     <li>
         
         @foreach (var product in Model)

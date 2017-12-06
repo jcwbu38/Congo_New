@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace test5.Models.ShoppingCart
+namespace test5.Models
 {
     public class ShoppingCart
     {
@@ -13,5 +13,7 @@ namespace test5.Models.ShoppingCart
         public int cartQuantity { set; get; }
         public int id { set; get; }
         public string discountCode { set; get; }
+        public string stowLocation { get; set; }
+        public string productName { get; set; }
     }
 }

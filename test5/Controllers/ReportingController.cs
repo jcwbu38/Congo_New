@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* ReportingController.cs
+ * This contoller provides access to the reporting system that will be used by users to view the database.
+ *
+ */
+using System;
 using Microsoft.EntityFrameworkCore;
 using test5.Models;
 using System.Linq;

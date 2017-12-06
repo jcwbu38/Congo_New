@@ -1,3 +1,7 @@
+/* InventoryController.cs
+ * This contoller provides access to the the inventory database for updating the contents.
+ * 
+ */
 using System;
 using System.Collections.Generic;
 using System.Linq;

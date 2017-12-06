@@ -6898,4 +6898,37 @@ td.visible-print {
 
 .checkout {
     list-style: none;
+    width: 50%;
 }
+
+.checkout label {
+    margin-right: 2em;
+}
+
+.checkout input {
+
+}
+
+.checkoutItemList {
+    white-space: nowrap;
+    display: inline-block;
+    overflow-y: scroll;
+    max-width: 20em;
+}
+.checkoutItemNum {
+    text-align: left;
+}
+
+.checkoutItemDesc {
+    text-wrap: normal;
+    text-align: left;
+}
+
+.checkoutItemPrice {
+    text-align: left;
+}
+
+.checkoutItemQty {
+    text-align: left;
+}
+

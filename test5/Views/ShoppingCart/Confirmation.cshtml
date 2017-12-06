@@ -1,35 +1,196 @@
 ﻿@model test5.ViewModels.CheckoutViewModel;
 @{
     ViewBag.Title = "Confirmation";
+    var count = 1;
+    var totalPrice = 0.0;
+    var totalQty = 0;
+}
+<style>
+.confTable th {
+    font-size: large;
+    text-decoration: underline;
+    padding-left: 3em;
 }
 
+.confTableRowName {
+    font-weight: bold;
+}
+
+.confTableRowData {
+    padding-left: 4em;
+}
+
+.checkoutItemList {
+
+}
+
+.checkoutItemNum {
+    text-align: center;
+    width: 10%;
+}
+
+.checkoutItemDesc {
+    text-wrap: normal;
+    text-align: center;
+    width: 50%;
+}
+
+.checkoutItemPrice {
+    text-align: center;
+    width: 10%;
+}
+
+.checkoutItemQty {
+    text-align: center;
+    width: 10%;
+}
+
+</style>
 <!-- Display general product info here... -->
 <div>
     <br />
-    <h1> Thank you for your purchase</h1>
+    <h1>Confirmation</h1>
     <br>
-    <h4>Order Confirmation:</h4> 
-    <br>@Model.User.First @Model.User.Last
-    <br>@Model.User.Address1
-    <br>@Model.User.City, @Model.User.State
-    <br>@Model.User.Zip   
-    <br>@Model.User.Email
-    <br>
-    <br>
-    <li class="confirmation">
-        @foreach (var item in Model.ShoppingCart)
+    
+    <table class="confTable">
+        <tr>
+            <th></th><th>Billing Information</th><th>Shipping Information</th>
+        </tr>
+        <tr>
+            <td class="confTableRowName">First Name</td>
+            <td class="confTableRowData">@Model.User.First</td>
+            <td class="confTableRowData">@Model.ShippingInfo.First</td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Last Name</td>
+            <td class="confTableRowData">@Model.User.Last</td>
+            <td class="confTableRowData">@Model.ShippingInfo.Last</td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Address 1</td>
+            <td class="confTableRowData">@Model.User.Address1</td>
+            <td class="confTableRowData">@Model.ShippingInfo.Address1</td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Address 2</td>
+            <td class="confTableRowData">@Model.User.Address2</td>
+            <td class="confTableRowData">@Model.ShippingInfo.Address2</td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">City</td>
+            <td class="confTableRowData">@Model.User.City</td>
+            <td class="confTableRowData">@Model.ShippingInfo.City</td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">State</td>
+            <td class="confTableRowData">@Model.User.State</td>
+            <td class="confTableRowData">@Model.ShippingInfo.State</td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Zip Code</td>
+            <td class="confTableRowData">@Model.User.Zip</td>
+            <td class="confTableRowData">@Model.ShippingInfo.Zip</td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Phone #</td>
+            <td class="confTableRowData">@Model.User.Phone</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Email</td>
+            <td class="confTableRowData">@Model.User.Email</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Credit Card #</td>
+            <td class="confTableRowData">@Model.User.CardNumber</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Expiration Date</td>
+            <td class="confTableRowData">@Model.User.ExpDate</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">SVC</td>
+            <td class="confTableRowData">@Model.User.Svc</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="confTableRowName">Name on Card</td>
+            <td class="confTableRowData">@Model.User.NameOnCard</td>
+            <td></td>
+        </tr>
+    </table>
+    <br />
+    <p style="border-top: 2px solid #8c8b8b;" />
+    <h2>Items to Purchase</h2>
+
+    <div class="form-control">
+        <label class="checkoutItemNum">Item #</label>
+        <label class="checkoutItemDesc">Descrption</label>
+        <label class="checkoutItemPrice">Price</label>
+        <label class="checkoutItemQty">Qty</label>
+    </div>
+   
+    @foreach (var Cart in Model.ShoppingCart)
+    {
+        <div>
+            <label class="checkoutItemNum">@count</label>
+            <label class="checkoutItemDesc">@Cart.description</label>
+        @if (Cart.discountPrice > 0)
         {
-            <ul>
-                <p class="cartItemDesc">@item.description</p>
-                    @if (item.discountPrice > 0)
-                    {
-                        <p class="pricing">$@item.discountPrice USD</p>
-                    }
-                    else
-                    {
-                        <p class="pricing">$@item.price USD</p>
-                    }
-            </ul>
+            <label class="checkoutItemPrice">$@Cart.discountPrice USD</label> <!-- requirement 3.2.8.3.1, 3.4.2 -->
+            totalPrice += Cart.discountPrice;
         }
-    </li>
+        else
+        {
+            <label class="checkoutItemPrice">$@Cart.price USD</label> <!-- requirement 3.2.8.3.1, 3.4.2 -->
+            totalPrice += Cart.price;
+        }
+            <label class="checkoutItemQty">@Cart.cartQuantity</label> <!-- requirement 3.2.11.3.2 -->
+        </div>
+        count++;
+        totalQty += Cart.cartQuantity;
+         
+    }
+    <p style="border-top: 1px solid #8c8b8b;" />
+    <div>
+        <label class="checkoutItemNum"></label>
+        <label class="checkoutItemDesc">Total</label>
+        <label class="checkoutItemPrice">$@totalPrice USD</label> <!-- requirement 3.2.8.3.1, 3.4.2 -->
+        <label class="checkoutItemQty">@totalQty</label> <!-- requirement 3.2.11.3.2 -->
+    </div>
+
+    <form action="/PurchaseOrder/CreatePO" method="post">
+ 
+        <input asp-for="User.Id" type="hidden" />
+        <input asp-for="User.First" type="hidden" />
+        <input asp-for="User.Last" type="hidden" />
+        <input asp-for="User.Address1" type="hidden" />
+        <input asp-for="User.Address2" type="hidden" />
+        <input asp-for="User.City" type="hidden" />
+        <input asp-for="User.State" type="hidden" />
+        <input asp-for="User.Zip" type="hidden" />
+        <input asp-for="User.Phone" type="hidden" />
+        <input asp-for="User.Email" type="hidden" />
+
+        <input asp-for="ShippingInfo.First" type="hidden" />
+        <input asp-for="ShippingInfo.Last" type="hidden" />
+        <input asp-for="ShippingInfo.Address1" type="hidden" />
+        <input asp-for="ShippingInfo.Address2" type="hidden" />
+        <input asp-for="ShippingInfo.City" type="hidden" />
+        <input asp-for="ShippingInfo.State" type="hidden" />
+        <input asp-for="ShippingInfo.Zip" type="hidden" />
+
+        <input asp-for="User.CardNumber" type="hidden" />
+        <input asp-for="User.ExpDate" type="hidden" />
+        <input asp-for="User.NameOnCard" type="hidden" />
+        <input asp-for="User.Svc" type="hidden" />
+
+        <br />
+        <div>
+            <input type="submit" value="Purchase" class="btn btn-primary" />
+        </div>
+    </form>
 </div>
