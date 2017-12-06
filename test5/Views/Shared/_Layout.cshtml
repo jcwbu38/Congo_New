@@ -34,8 +34,8 @@
                     <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
                     <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
                     <li>@Html.ActionLink("Reporting", "Index", "Reporting")</li>
-
                 </ul>
+                @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>

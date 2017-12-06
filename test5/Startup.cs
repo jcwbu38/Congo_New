@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.EntityFrameworkCore;
 using test5.Models;
+using test5.Services;
 
 namespace test5
 {
@@ -23,7 +25,7 @@ namespace test5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            
             // Add Inventory DB
             services.AddDbContext<InventoryContext>(options =>
             options.UseSqlite("Data Source=Inventory.db"));
@@ -36,11 +38,25 @@ namespace test5
             services.AddDbContext<PurchaseOrderContext>(options =>
             options.UseSqlite("Data Source=PurchaseOrder.db"));
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlite("Data Source=ApplicationDb.db"));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            // Add application services.
+            services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddMvc();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -51,6 +67,8 @@ namespace test5
             }
 
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
