@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using test5.Models;
 
-namespace test5.Migrations.ApplicationDb
+namespace test5.Migrations.User
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171206051246_AddingIdentity")]
-    partial class AddingIdentity
+    [DbContext(typeof(UserContext))]
+    [Migration("20171206183440_RemakingUserMigrations")]
+    partial class RemakingUserMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -127,12 +127,20 @@ namespace test5.Migrations.ApplicationDb
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("test5.Models.ApplicationUser", b =>
+            modelBuilder.Entity("test5.Models.User", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("Address1");
+
+                    b.Property<string>("Address2");
+
+                    b.Property<string>("CardNumber");
+
+                    b.Property<string>("City");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -142,9 +150,21 @@ namespace test5.Migrations.ApplicationDb
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("ExpDate")
+                        .HasMaxLength(4);
+
+                    b.Property<string>("First")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Last")
+                        .HasMaxLength(100);
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NameOnCard")
+                        .HasMaxLength(50);
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -154,16 +174,28 @@ namespace test5.Migrations.ApplicationDb
 
                     b.Property<string>("PasswordHash");
 
+                    b.Property<string>("Phone");
+
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<string>("State")
+                        .HasMaxLength(2);
+
+                    b.Property<string>("Svc")
+                        .HasMaxLength(3);
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("UserType");
+
+                    b.Property<int>("Zip");
 
                     b.HasKey("Id");
 
@@ -187,7 +219,7 @@ namespace test5.Migrations.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("test5.Models.ApplicationUser")
+                    b.HasOne("test5.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -195,7 +227,7 @@ namespace test5.Migrations.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("test5.Models.ApplicationUser")
+                    b.HasOne("test5.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -208,7 +240,7 @@ namespace test5.Migrations.ApplicationDb
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("test5.Models.ApplicationUser")
+                    b.HasOne("test5.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -216,7 +248,7 @@ namespace test5.Migrations.ApplicationDb
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("test5.Models.ApplicationUser")
+                    b.HasOne("test5.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

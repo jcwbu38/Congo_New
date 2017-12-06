@@ -38,11 +38,8 @@ namespace test5
             services.AddDbContext<PurchaseOrderContext>(options =>
             options.UseSqlite("Data Source=PurchaseOrder.db"));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite("Data Source=ApplicationDb.db"));
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<UserContext>()
                 .AddDefaultTokenProviders();
 
             // Add application services.

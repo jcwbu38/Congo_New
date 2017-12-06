@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using test5.Models
 @using test5.Views.Manage
-@inject SignInManager<ApplicationUser> SignInManager
+@inject SignInManager<User> SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
 }

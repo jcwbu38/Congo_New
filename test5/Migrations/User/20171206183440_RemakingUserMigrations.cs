@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace test5.Migrations.ApplicationDb
+namespace test5.Migrations.User
 {
-    public partial class AddingIdentity : Migration
+    public partial class RemakingUserMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,19 +28,32 @@ namespace test5.Migrations.ApplicationDb
                 {
                     Id = table.Column<string>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
+                    Address1 = table.Column<string>(nullable: true),
+                    Address2 = table.Column<string>(nullable: true),
+                    CardNumber = table.Column<string>(nullable: true),
+                    City = table.Column<string>(nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(nullable: false),
+                    ExpDate = table.Column<string>(maxLength: 4, nullable: true),
+                    First = table.Column<string>(maxLength: 100, nullable: true),
+                    Last = table.Column<string>(maxLength: 100, nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NameOnCard = table.Column<string>(maxLength: 50, nullable: true),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     SecurityStamp = table.Column<string>(nullable: true),
+                    State = table.Column<string>(maxLength: 2, nullable: true),
+                    Svc = table.Column<string>(maxLength: 3, nullable: true),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: true),
+                    UserType = table.Column<string>(nullable: true),
+                    Zip = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

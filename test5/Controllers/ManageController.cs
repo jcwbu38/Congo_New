@@ -10,18 +10,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using test5.Extensions;
 using test5.Models;
 using test5.Models.ManageViewModels;
 using test5.Services;
 
-namespace Logon.Controllers
+namespace test5.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
@@ -29,8 +30,8 @@ namespace Logon.Controllers
         private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public ManageController(
-          UserManager<ApplicationUser> userManager,
-          SignInManager<ApplicationUser> signInManager,
+          UserManager<User> userManager,
+          SignInManager<User> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
@@ -121,7 +122,8 @@ namespace Logon.Controllers
             }
 
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+            var userId = user.Id.ToString();
+            var callbackUrl = Url.EmailConfirmationLink(userId, code, Request.Scheme);
             var email = user.Email;
             await _emailSender.SendEmailConfirmationAsync(email, callbackUrl);
 
@@ -266,7 +268,8 @@ namespace Logon.Controllers
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            var info = await _signInManager.GetExternalLoginInfoAsync(user.Id);
+            var userId = user.Id.ToString();
+            var info = await _signInManager.GetExternalLoginInfoAsync(userId);
             if (info == null)
             {
                 throw new ApplicationException($"Unexpected error occurred loading external login info for user with ID '{user.Id}'.");
