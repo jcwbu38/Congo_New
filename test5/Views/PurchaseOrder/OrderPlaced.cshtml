@@ -2,14 +2,23 @@
 @{ 
     ViewBag.Title = "Order Placed";
 }
+<script>
+    function generateConfNum()
+    {
+        var num = Math.floor((Math.random() * 10000000000));
+        document.getElementById("confNum").innerHTML = num;
 
+    }
+</script>
 <!-- Display general product info here... -->
-<div>
-    <br />
-    <h1>Thank You!</h1>
-    <br>
-    <p>Your order has been placed. Here is your confirmation number:</p>
-    <h4>#123456789</h4>
-    <br />
-    <p>You will receive a tracking number in the next few days via your e-mail address.</p>
-</div>
+<body onload="generateConfNum();">
+    <div>
+        <br />
+        <h1>Thank You!</h1>
+        <br>
+        <p>Your order has been placed. Here is your confirmation number:</p>
+        <h4 id="confNum"></h4>
+        <br />
+        <p>You will receive a tracking number in the next few days via your e-mail address.</p>
+    </div>
+</body>
