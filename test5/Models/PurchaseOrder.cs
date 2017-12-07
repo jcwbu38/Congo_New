@@ -35,6 +35,8 @@ namespace test5.Models
         public string stowLocation { get; set; }
         [Required]
         public int quantity { get; set; }
+        [Required]
+        public string poID { get; set; }
 
     }
 }
