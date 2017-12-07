@@ -40,6 +40,9 @@
                     @Html.DisplayNameFor(model => model.email)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.phoneNumber)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.productID)
                 </th>
                 <th>
@@ -53,6 +56,9 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.stowLocation)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.quantity)
                 </th>
             <th></th>
         </tr>
@@ -88,6 +94,9 @@
                 @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.phoneNumber)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.productID)
             </td>
             <td>
@@ -101,6 +110,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.stowLocation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.quantity)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

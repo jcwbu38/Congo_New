@@ -169,7 +169,7 @@ namespace test5.Controllers
                     PurchaseOrder po = new PurchaseOrder
                     {
                         ID = await _context.PurchaseOrder.CountAsync(),
-                        userID = order.User.Id,
+                        userID = Int32.Parse(order.User.Id),
                         firstName = order.ShippingInfo.First,
                         lastName = order.ShippingInfo.Last,
                         address1 = order.ShippingInfo.Address1,

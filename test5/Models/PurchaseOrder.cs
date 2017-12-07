@@ -22,13 +22,19 @@ namespace test5.Models
         public int zip { get; set; }
         [Required]
         public string email { get; set; }
+        public string phoneNumber { get; set; }
         [Required]
         public string productID { get; set; }
         [Required]
         public string productName { get; set; }
         [Required]
         public DateTime datePurchased { get; set; }
+        [Required]
         public DateTime shipDate { get; set; }
+        [Required]
         public string stowLocation { get; set; }
+        [Required]
+        public int quantity { get; set; }
+
     }
 }
