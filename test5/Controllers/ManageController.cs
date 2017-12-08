@@ -59,8 +59,19 @@ namespace test5.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
+                First = user.First,
+                Last = user.Last,
+                Address1 = user.Address1,
+                Address2 = user.Address2,
+                City = user.City,
+                State = user.State,
+                Zip = user.Zip,
                 PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
+                NameOnCard = user.NameOnCard,
+                CardNumber = user.CardNumber,
+                ExpDate = user.ExpDate,
+                Svc = user.Svc,
                 StatusMessage = StatusMessage
             };
 
@@ -101,7 +112,7 @@ namespace test5.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
-
+            
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
         }

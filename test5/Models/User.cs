@@ -31,7 +31,6 @@ namespace test5.Models
         [Phone]
         public string Phone { get; set; }
 
-        [CreditCard]
         public string CardNumber { get; set; }
 
         [StringLength(4)]
