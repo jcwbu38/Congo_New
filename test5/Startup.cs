@@ -34,6 +34,10 @@ namespace test5
             services.AddDbContext<UserContext>(options =>
             options.UseSqlite("Data Source=User.db"));
 
+            // Add User DB
+            services.AddDbContext<User2Context>(options =>
+            options.UseSqlite("Data Source=User.db"));
+
             // Add Purchase Order DB
             services.AddDbContext<PurchaseOrderContext>(options =>
             options.UseSqlite("Data Source=PurchaseOrder.db"));

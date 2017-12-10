@@ -112,9 +112,9 @@ namespace test5.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
                 }
             }
-            
+
             StatusMessage = "Your profile has been updated";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Edit", "User2", model);
         }
 
         [HttpPost]

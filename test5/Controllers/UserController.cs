@@ -445,6 +445,11 @@ namespace test5.Controllers
             return View();
         }
 
+        public IActionResult ListUsers()
+        {
+            return View(_userManager.Users.ToList());
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)

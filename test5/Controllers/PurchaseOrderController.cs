@@ -183,7 +183,8 @@ namespace test5.Controllers
                         productID = item.id.ToString(),
                         productName = item.productName,
                         datePurchased = DateTime.Now,
-                        stowLocation = item.stowLocation
+                        stowLocation = item.stowLocation,
+                        quantity = item.cartQuantity
                     };
 
                     _context.Add(po);

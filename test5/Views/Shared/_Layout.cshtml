@@ -34,12 +34,16 @@
                     <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
                     <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
                     <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
-                    <li>@Html.ActionLink("Reporting", "Index", "Reporting")</li>
+                    <li>@Html.ActionLink("User", "ListUsers", "User")</li>
                 </ul>
+            </div>
+            <div>
                 @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>
+    <br />
+    <br />
     <div class="container body-content">
         @RenderBody()
         <hr />
