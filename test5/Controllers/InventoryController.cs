@@ -152,5 +152,29 @@ namespace test5.Controllers
         {
             return _context.Inventory.Any(e => e.ID == id);
         }
+
+        public async Task<IActionResult> removeItemFromInv()
+        {
+            foreach (var item in ShoppingCartController.products)
+            {
+                var inventory = await _context.Inventory.SingleOrDefaultAsync(m => m.itemID == item.id);
+                if (inventory != null)
+                {
+                    inventory.quantity = inventory.quantity - item.cartQuantity;
+                    if (inventory.quantity == 0)
+                    {
+                        // TODO Alert Sales and the Seller that the inventory is out.
+                    }
+                    else if (inventory.quantity < 6)
+                    {
+                        // TODO Alert Sales and the Seller that the inventory is low.
+                    }
+                    await _context.SaveChangesAsync();
+                }
+            }
+            ShoppingCartController.products.Clear();
+            return View("OrderPlaced");
+        }
+
     }
 }

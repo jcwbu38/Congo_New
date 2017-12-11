@@ -478,6 +478,37 @@ namespace test5.Controllers
             return View(model);
         }
 
+        // ShoppingCart/Checkout - This method handles retreiving and displaying the user and shipping information for the order.
+        public async Task<IActionResult> Checkout()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+            /*
+            var user = new User
+            {
+                //Id = 1234,
+                First = "Test",
+                Last = "Account",
+
+                Address1 = "12438 SE 198th Place",
+                City = "Test",
+                State = "TX",
+                Zip = 98031,
+                Phone = "1234567890",
+                Email = "me@you.com",
+
+                CardNumber = "1414045612216589",
+                ExpDate = "1215",
+                NameOnCard = "T. Account",
+                Svc = "123"
+            };
+            */
+            return RedirectToAction("Checkout", "ShoppingCart", user);
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)
