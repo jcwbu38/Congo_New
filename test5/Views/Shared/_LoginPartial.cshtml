@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@using test5.Models
+@using System.Security.Claims;
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -9,7 +9,15 @@
     <form asp-area="" asp-controller="User" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                @if (!User.Identities.Any(u => u.IsAuthenticated))
+                {
+
+                }
+                else
+                {
+                    <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                }
+                
             </li>
             <li>
                 <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>

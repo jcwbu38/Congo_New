@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using test5.Models;
 using test5.ViewModels;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace test5.Controllers
 {
+    [AllowAnonymous]
     public class ShoppingCartController : Controller
     {
         public static List<Models.ShoppingCart> products = new List<Models.ShoppingCart>();

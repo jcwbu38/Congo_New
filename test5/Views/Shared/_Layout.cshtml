@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authorization;
+@inject IAuthorizationService AuthorizationService
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,16 +26,61 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <!-- requirement 3.2.10.3.1 -->
-                    <li>@Html.ActionLink("New Products", "Index", "NewProduct")</li>
-                    <!-- requirement 3.2.10.3.1 -->
-                    <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
-                    <!-- requirement 3.2.11.3.2 -->
-                    <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
-                    <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
-                    <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
-                    <li>@Html.ActionLink("User", "ListUsers", "User")</li>
+                    @{
+                        var adminAuthorizationResult = await AuthorizationService.AuthorizeAsync(User, null, "AdministratorsOnly");
+                        var logisticAuthorizationResult = await AuthorizationService.AuthorizeAsync(User, null, "LogisticsOnly");
+                        var saleAuthorizationResult =  await AuthorizationService.AuthorizeAsync(User, null, "SalesOnly");
+                        
+
+                        if (adminAuthorizationResult.Succeeded)
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <!-- requirement 3.2.10.3.1 -->
+                            <li>@Html.ActionLink("New Products", "Index", "NewProduct")</li>
+                            <!-- requirement 3.2.10.3.1 -->
+                            <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
+                            <!-- requirement 3.2.11.3.2 -->
+                            <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
+                            <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
+                            <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
+                            //<li>@Html.ActionLink("User", "ListUsers", "User")</li>
+                        }
+                        else if (logisticAuthorizationResult.Succeeded)
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <!-- requirement 3.2.10.3.1 -->
+                            <li>@Html.ActionLink("New Products", "Index", "NewProduct")</li>
+                            <!-- requirement 3.2.10.3.1 -->
+                            <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
+                            <!-- requirement 3.2.11.3.2 -->
+                            <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
+                            <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
+                        }
+                        else if (saleAuthorizationResult.Succeeded)
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <!-- requirement 3.2.10.3.1 -->
+                            <li>@Html.ActionLink("New Products", "Index", "NewProduct")</li>
+                            <!-- requirement 3.2.10.3.1 -->
+                            <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
+                            <!-- requirement 3.2.11.3.2 -->
+                            <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
+                            <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                            <!-- requirement 3.2.10.3.1 -->
+                            <li>@Html.ActionLink("New Products", "Index", "NewProduct")</li>
+                            <!-- requirement 3.2.10.3.1 -->
+                            <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
+                            <!-- requirement 3.2.11.3.2 -->
+                            <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
+                            <li>@Html.ActionLink("User", "ListUsers", "User")</li>
+                        }
+                    }
+                    
+                    
                 </ul>
             </div>
             <div>

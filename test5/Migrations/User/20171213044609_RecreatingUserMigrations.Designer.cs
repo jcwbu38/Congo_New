@@ -11,8 +11,8 @@ using test5.Models;
 namespace test5.Migrations.User
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20171208033236_deleteCardNumberValidation")]
-    partial class deleteCardNumberValidation
+    [Migration("20171213044609_RecreatingUserMigrations")]
+    partial class RecreatingUserMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,13 +134,15 @@ namespace test5.Migrations.User
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<string>("Address1");
+                    b.Property<string>("Address1")
+                        .IsRequired();
 
                     b.Property<string>("Address2");
 
                     b.Property<string>("CardNumber");
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
@@ -154,9 +156,11 @@ namespace test5.Migrations.User
                         .HasMaxLength(4);
 
                     b.Property<string>("First")
+                        .IsRequired()
                         .HasMaxLength(100);
 
                     b.Property<string>("Last")
+                        .IsRequired()
                         .HasMaxLength(100);
 
                     b.Property<bool>("LockoutEnabled");
@@ -172,6 +176,8 @@ namespace test5.Migrations.User
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
+                    b.Property<string>("OwnerID");
+
                     b.Property<string>("PasswordHash");
 
                     b.Property<string>("Phone");
@@ -183,6 +189,7 @@ namespace test5.Migrations.User
                     b.Property<string>("SecurityStamp");
 
                     b.Property<string>("State")
+                        .IsRequired()
                         .HasMaxLength(2);
 
                     b.Property<string>("Svc")
@@ -195,7 +202,8 @@ namespace test5.Migrations.User
 
                     b.Property<string>("UserType");
 
-                    b.Property<int>("Zip");
+                    b.Property<int>("Zip")
+                        .HasMaxLength(5);
 
                     b.HasKey("Id");
 

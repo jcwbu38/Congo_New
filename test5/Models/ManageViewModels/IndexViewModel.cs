@@ -42,7 +42,6 @@ namespace test5.Models.ManageViewModels
         [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 
-        [CreditCard]
         [Display(Name = "Card number")]
         public string CardNumber { get; set; }
 

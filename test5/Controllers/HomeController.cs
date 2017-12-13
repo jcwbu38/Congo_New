@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using test5.Models;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace test5.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly InventoryContext _context;

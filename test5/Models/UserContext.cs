@@ -15,7 +15,7 @@ namespace test5.Models
         {
         }
 
-        public DbSet<test5.Models.User> User { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

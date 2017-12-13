@@ -7,12 +7,14 @@ using Microsoft.EntityFrameworkCore;
 using test5.Models;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using test5.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace test5.Models
+namespace test5.Controllers
 {
+    
     public class ReportingController : Controller
     {
 

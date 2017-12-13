@@ -5,26 +5,32 @@ namespace test5.Models
 {
     public class User : IdentityUser
     {
-        public string UserType { get; set; }
+        public string OwnerID { get; set; }
 
+        public  string UserType{ get; set; }
+
+        [Required]
         [StringLength(100)]
         public string First { get; set; }
 
-        
+        [Required]
         [StringLength(100)]
         public string Last { get; set; }
-        
+
+        [Required]
         public string Address1 { get; set; }
 
         public string Address2 { get; set; }
-        
 
+        [Required]
         public string City { get; set; }
 
-        
+        [Required]
         [StringLength(2)]
         public string State { get; set; }
-        
+
+        [Required]
+        [StringLength(5)]
         public int Zip { get; set; }
 
         
@@ -45,4 +51,13 @@ namespace test5.Models
 
         
     }
+
+    //public enum UserType
+    //{
+    //    Administrator,
+    //    Customer,
+    //    Logistics,
+    //    Sales
+    //}
+
 }

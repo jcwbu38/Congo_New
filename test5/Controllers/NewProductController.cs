@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using test5.Models;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace test5.Controllers
 {
+    [AllowAnonymous]
     public class NewProductController : Controller
     {
         private readonly InventoryContext _context;
