@@ -5,15 +5,6 @@
     ViewBag.Title = "Product Details";
 }
 <script>
-    // If the inventory is empty, do not allow the customer to add to cart and display Out of Stock. Requierment 3.2.9.3.2, 3.2.9.3.3
-    function checkStock()
-    {
-        if (1 < 0)
-        {
-            document.getElementById("addButton").innerHTML = "Out of Stock";
-            document.getElementById("addButton").disabled = true;
-        }
-    }
 
     // Validate to item quantity before adding tiem to the shopping cart.
     function addToCart(invQty)
@@ -37,13 +28,13 @@
 </script>
 
 <!-- Display detailed product info here... (Section 4.7) -->
-<div class="product_details">
+<div class="product_details" onload="checkStock()">
     <br />
     <h1> Product Details</h1>
     <img src="@Model.image" />
     <br />
 
-   @{ 
+@{ 
     if (Model.EntryDate.Year == DateTime.Today.Year)
     {
         <strong>NEW! </strong>
@@ -64,17 +55,16 @@
             $@Model.price USD <!-- requirement 3.2.8.3.1, 3.4.2 -->
         </p>
     }
-
+    <!-- If the inventory is empty, do not allow the customer to add to cart and display Out of Stock. Requierment 3.2.9.3.2, 3.2.9.3.3 -->
     if (Model.quantity < 1)
-        {
-            <p>Out of Stock</p>
-        }
-        else
-        {
-            <p>@Model.quantity In Stock</p>
-        }
+    {
+        <p>Out of Stock</p>
     }
-            
-    <textarea class="product_details" id="numToAdd">1</textarea>
-    <button onclick="addToCart(@Model.quantity)">Add to Cart</button>
+    else
+    {
+        <p>@Model.quantity In Stock</p>
+        <textarea class="product_details" id="numToAdd">1</textarea>
+        <button id="addButton" onclick="addToCart(@Model.quantity)">Add to Cart</button>
+    }
+} 
 </div>

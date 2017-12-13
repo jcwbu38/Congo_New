@@ -30,7 +30,6 @@ namespace test5.Models
         public string State { get; set; }
 
         [Required]
-        [StringLength(5)]
         public int Zip { get; set; }
 
         
