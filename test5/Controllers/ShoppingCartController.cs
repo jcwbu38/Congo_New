@@ -88,29 +88,11 @@ namespace test5.Controllers
         }
 
         // ShoppingCart/Checkout - This method handles retreiving and displaying the user and shipping information for the order.
-        public IActionResult Checkout()
+
+        public IActionResult Checkout(User user)
         {
             if (products.Count() > 0)
             {
-                var user = new User
-                {
-                    //Id = 1234,
-                    First = "Test",
-                    Last = "Account",
-
-                    Address1 = "12438 SE 198th Place",
-                    City = "Test",
-                    State = "TX",
-                    Zip = 98031,
-                    Phone = "1234567890",
-                    Email = "me@you.com",
-
-                    CardNumber = "1414045612216589",
-                    ExpDate = "1215",
-                    NameOnCard = "T. Account",
-                    Svc = "123"
-                };
-
                 var shippingInfo = new User();
 
                 var viewModel = new CheckoutViewModel
@@ -126,6 +108,7 @@ namespace test5.Controllers
                 return View("Index", products);
             }
         }
+        
 
         // ShoppingCart/Confirmation - This method handles displaying the complete order information for the customer to confirm before the order is placed.
         public IActionResult Confirmation(CheckoutViewModel order)

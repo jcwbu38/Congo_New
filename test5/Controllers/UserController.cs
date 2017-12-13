@@ -289,10 +289,11 @@ namespace test5.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
+        public async Task<IActionResult> LogOff()
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            ShoppingCartController.products.Clear();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 

@@ -164,12 +164,25 @@ namespace test5.Controllers
 
             if (paymentSuccess == 1)
             {
+                var poString = await _context.PurchaseOrder.MaxAsync(m => m.poID);
+                int poNum;
+                if (poString != null)
+                {
+                    poNum = Int32.Parse(poString) + 1;
+                    if (poNum == 1)
+                    {
+                        poNum = DateTime.Now.Year * 100000;
+                    }
+                }
+                else
+                    poNum = DateTime.Now.Year * 100000;
+
                 foreach (var item in ShoppingCartController.products)
                 {
                     PurchaseOrder po = new PurchaseOrder
                     {
                         ID = await _context.PurchaseOrder.CountAsync(),
-                        userID = Int32.Parse(order.User.Id),
+                        //userID = Int32.Parse(order.User.Id), TODO add back when user model has an ID field.
                         firstName = order.ShippingInfo.First,
                         lastName = order.ShippingInfo.Last,
                         address1 = order.ShippingInfo.Address1,
@@ -178,27 +191,26 @@ namespace test5.Controllers
                         state = order.ShippingInfo.State,
                         zip = order.ShippingInfo.Zip,
                         email = order.User.Email,
-                        //need phone#
+                        phoneNumber = order.User.Phone,
 
                         productID = item.id.ToString(),
                         productName = item.productName,
                         datePurchased = DateTime.Now,
                         stowLocation = item.stowLocation,
-                        quantity = item.cartQuantity
+                        quantity = item.cartQuantity,
+                        poID = poNum.ToString()
                     };
 
                     _context.Add(po);
                     await _context.SaveChangesAsync();
                 }
-
-                ShoppingCartController.products.Clear();
             }
             else
             {
                 return View("ProcessingError");
             }
 
-            return View("OrderPlaced");
+            return RedirectToAction("removeItemFromInv", "Inventory");
         }
 
         private bool PurchaseOrderExists(int id)

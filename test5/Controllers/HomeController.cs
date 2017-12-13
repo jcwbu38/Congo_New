@@ -20,7 +20,6 @@ namespace test5.Controllers
     public class HomeController : Controller
     {
         private readonly InventoryContext _context;
-        public static List<ShoppingCart> shoppingCart = new List<ShoppingCart>();
 
         public HomeController(InventoryContext context)
         {
@@ -84,8 +83,6 @@ namespace test5.Controllers
                 stowLocation = inventory.locationID,
                 productName = inventory.itemName
             };
-
-            shoppingCart.Add(newItemToCart);
 
             var item = await _context.Inventory.SingleOrDefaultAsync(m => m.itemID == id);
 
