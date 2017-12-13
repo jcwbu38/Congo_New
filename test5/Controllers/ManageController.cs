@@ -114,7 +114,7 @@ namespace test5.Controllers
             }
 
             StatusMessage = "Your profile has been updated";
-            return RedirectToAction("Edit", "User2", model);
+            return RedirectToAction("Edit", "User", model);
         }
 
         [HttpPost]
