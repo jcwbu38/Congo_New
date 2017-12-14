@@ -517,18 +517,17 @@ namespace test5.Controllers
 
 
         [AllowAnonymous]
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> AdminDetails(string id)
         {
-            if (id == null)
+            if (String.IsNullOrEmpty(id))
             {
-                return NotFound();
+                return Content("Error, user email cannot be empty.");
             }
 
-            var user = await _context.Users
-                .SingleOrDefaultAsync(m => Int32.Parse(m.Id) == id);
+            var user = await _context.Users.SingleOrDefaultAsync(m => m.Email.Equals(id));
             if (user == null)
             {
-                return NotFound();
+                return Content("Error, user email " + id + " could not be found in the User database.");
             }
 
             return View(user);
@@ -547,7 +546,7 @@ namespace test5.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Create([Bind("ID,first,last,address1,address2,state,zip,email")] User user)
+        public async Task<IActionResult> AdminCreate([Bind("ID,first,last,address1,address2,state,zip,email")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -557,6 +556,54 @@ namespace test5.Controllers
             }
             return View(user);
         }
+
+        [AllowAnonymous]
+        //  GET: User/Edit/5
+        public async Task<IActionResult> AdminEdit(string id)
+        {
+            if (String.IsNullOrEmpty(id))
+            {
+                return Content("Error, user email cannot be empty.");
+            }
+
+            var user = await _context.Users.SingleOrDefaultAsync(m => m.Email.Equals(id));
+            if (user == null)
+            {
+                return Content("Error, user email " + id + " could not be found in the User database.");
+            }
+            return View(user);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> AdminUpdateUser(User user)
+        {
+            User theUser = await _context.Users.SingleOrDefaultAsync(m => m.Email.Equals(user.Email));
+            if (theUser != null)
+            {
+                theUser.UserType = user.UserType;
+                theUser.First = user.First;
+                theUser.Last = user.Last;
+                theUser.Address1 = user.Address1;
+                theUser.Address2 = user.Address2;
+                theUser.City = user.City;
+                theUser.State = user.State;
+                theUser.Zip = user.Zip;
+                theUser.Phone = user.PhoneNumber;
+                theUser.NameOnCard = user.NameOnCard;
+                theUser.CardNumber = user.CardNumber;
+                theUser.ExpDate = user.ExpDate;
+                theUser.Svc = user.Svc;
+
+                _context.Update(theUser);
+                await _context.SaveChangesAsync();
+            }
+
+            return View("ListUsers");
+
+        }
+
+
+
 
         [AllowAnonymous]
         public async Task<IActionResult> Edit(IndexViewModel user)
@@ -587,18 +634,17 @@ namespace test5.Controllers
 
         [AllowAnonymous]
         // GET: User/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> AdminDelete(string id)
         {
-            if (id == null)
+            if (String.IsNullOrEmpty(id))
             {
-                return NotFound();
+                return Content("Error, user email cannot be empty.");
             }
 
-            var user = await _context.Users
-                .SingleOrDefaultAsync(m => Int32.Parse(m.Id) == id);
+            var user = await _context.Users.SingleOrDefaultAsync(m => m.Email.Equals(id));
             if (user == null)
             {
-                return NotFound();
+                return Content("Error, user email " + id + " could not be found in the User database.");
             }
 
             return View(user);
@@ -610,16 +656,16 @@ namespace test5.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.Users.SingleOrDefaultAsync(m => Int32.Parse(m.Id) == id);
+            var user = await _context.Users.SingleOrDefaultAsync(m => m.Email.Equals(id));
             _context.Users.Remove(user);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(ListUsers));
         }
 
         [AllowAnonymous]
-        private bool UserExists(int id)
+        private bool UserExists(string id)
         {
-            return _context.Users.Any(e => Int32.Parse(e.Id) == id);
+            return _context.Users.Any(e => e.Email.Equals(id));
         }
 
         #endregion

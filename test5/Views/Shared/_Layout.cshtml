@@ -40,7 +40,6 @@
                             <!-- requirement 3.2.10.3.1 -->
                             <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
                             <!-- requirement 3.2.11.3.2 -->
-                            <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
                             <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
                             <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
                             //<li>@Html.ActionLink("User", "ListUsers", "User")</li>
@@ -53,7 +52,6 @@
                             <!-- requirement 3.2.10.3.1 -->
                             <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
                             <!-- requirement 3.2.11.3.2 -->
-                            <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
                             <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
                         }
                         else if (saleAuthorizationResult.Succeeded)
@@ -64,10 +62,9 @@
                             <!-- requirement 3.2.10.3.1 -->
                             <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
                             <!-- requirement 3.2.11.3.2 -->
-                            <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
                             <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
                         }
-                        else
+                        else // Customer user type
                         {
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <!-- requirement 3.2.10.3.1 -->
@@ -76,7 +73,6 @@
                             <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
                             <!-- requirement 3.2.11.3.2 -->
                             <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
-                            <li>@Html.ActionLink("User", "ListUsers", "User")</li>
                         }
                     }
                     
