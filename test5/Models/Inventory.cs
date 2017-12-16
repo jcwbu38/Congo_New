@@ -15,8 +15,6 @@ namespace test5.Models
         public double price { set; get; }
         public int discountPrice { set; get; }
         public int quantity { set; get; }
-        public DateTime EntryDate;
-
     }
 
 }

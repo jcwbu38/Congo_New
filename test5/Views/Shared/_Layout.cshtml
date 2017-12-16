@@ -76,7 +76,7 @@
                             <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
                             <li>@Html.ActionLink("Users", "ListUsers", "User")</li>
                         }
-                        else // Customer
+                        else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Customers"))
                         {
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <!-- requirement 3.2.10.3.1 -->

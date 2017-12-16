@@ -39,39 +39,48 @@
         <div class="checkout">
             <input asp-for="User.Id" type="hidden" />
             <label asp-for="User.First" class="control-label">First Name</label>
-            <input asp-for="User.First" id="uFirst" class="form-control" />
+            <input asp-for="User.First" id="uFirst" class="form-control" required />
+            <span asp-validation-for="User.First" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.Last" class="control-label">Last Name</label>
-            <input asp-for="User.Last" id="uLast" class="form-control" />
+            <input asp-for="User.Last" id="uLast" class="form-control" required />
+            <span asp-validation-for="User.Last" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.Address1" class="control-label">Address 1</label>
-            <input asp-for="User.Address1" id="uAddress1" class="form-control" />
+            <input asp-for="User.Address1" id="uAddress1" class="form-control" required />
+            <span asp-validation-for="User.Address1" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.Address2" class="control-label">Address 2</label>
-            <input asp-for="User.Address2" id="uAddress2" class="form-control" />
+            <input asp-for="User.Address2" id="uAddress2" class="form-control" required />
+            <span asp-validation-for="User.Address2" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.City" class="control-label">City</label>
-            <input asp-for="User.City" id="uCity" class="form-control" />
+            <input asp-for="User.City" id="uCity" class="form-control" required />
+            <span asp-validation-for="User.City" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.State" class="control-label">State (two letter abbreviation)</label>
-            <input asp-for="User.State" id="uState" maxlength="2" class="form-control" />
+            <input asp-for="User.State" id="uState" maxlength="2" class="form-control" required />
+            <span asp-validation-for="User.State" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.Zip" class="control-label">Zip Code</label>
-            <input asp-for="User.Zip" id="uZip" maxlength="5" class="form-control" />
+            <input asp-for="User.Zip" id="uZip" maxlength="5" class="form-control" required />
+            <span asp-validation-for="User.Zip" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.Phone" class="control-label">Phone #</label>
-            <input asp-for="User.Phone" class="form-control" />
+            <input asp-for="User.Phone" class="form-control" required />
+            <span asp-validation-for="User.Phone" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.Email" class="control-label"></label>
-            <input asp-for="User.Email" class="form-control" />
+            <input asp-for="User.Email" class="form-control" required />
+            <span asp-validation-for="User.Email" class="text-danger"></span>
         </div>
         <br />
         <h3>Shipping Information</h3>
@@ -82,31 +91,38 @@
 
         <div class="checkout">
             <label asp-for="ShippingInfo.First" class="control-label">First Name</label>
-            <input asp-for="ShippingInfo.First" id="sFirst" class="form-control" />
+            <input asp-for="ShippingInfo.First" id="sFirst" class="form-control" required />
+            <span asp-validation-for="ShippingInfo.First" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="ShippingInfo.Last" class="control-label">Last Name</label>
-            <input asp-for="ShippingInfo.Last" id="sLast" class="form-control" />
+            <input asp-for="ShippingInfo.Last" id="sLast" class="form-control" required />
+            <span asp-validation-for="ShippingInfo.Last" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="ShippingInfo.Address1" class="control-label">Address 1</label>
-            <input asp-for="ShippingInfo.Address1" id="sAddress1" class="form-control" />
+            <input asp-for="ShippingInfo.Address1" id="sAddress1" class="form-control" required />
+            <span asp-validation-for="ShippingInfo.Address1" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="ShippingInfo.Address2" class="control-label">Address 2</label>
-            <input asp-for="ShippingInfo.Address2" id="sAddress2" class="form-control" />
+            <input asp-for="ShippingInfo.Address2" id="sAddress2" class="form-control" required />
+            <span asp-validation-for="ShippingInfo.Address2" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="ShippingInfo.City" class="control-label">City</label>
-            <input asp-for="ShippingInfo.City" id="sCity" class="form-control" />
+            <input asp-for="ShippingInfo.City" id="sCity" class="form-control" required />
+            <span asp-validation-for="ShippingInfo.City" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="ShippingInfo.State" class="control-label">State (two letter abbreviation)</label>
-            <input asp-for="ShippingInfo.State" id="sState" maxlength="2" class="form-control" />
+            <input asp-for="ShippingInfo.State" id="sState" maxlength="2" class="form-control" required />
+            <span asp-validation-for="ShippingInfo.State" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="ShippingInfo.Zip" class="control-label">Zip Code</label>
-            <input asp-for="ShippingInfo.Zip" id="sZip" maxlength="5" class="form-control" />
+            <input asp-for="ShippingInfo.Zip" id="sZip" maxlength="5" class="form-control" required />
+            <span asp-validation-for="ShippingInfo.Zip" class="text-danger"></span>
         </div>
         <br />
 
@@ -115,19 +131,22 @@
 
         <div class="checkout">
             <label asp-for="User.CardNumber" class="control-label">Credit Card Number</label>
-            <input asp-for="User.CardNumber" class="form-control" />
+            <input asp-for="User.CardNumber" class="form-control" required />
         </div>
         <div class="checkout">
             <label asp-for="User.ExpDate" class="control-label">Expiriation Date (mm/yy)</label>
-            <input asp-for="User.ExpDate" maxlength="5" class="form-control" />
+            <input asp-for="User.ExpDate" maxlength="5" class="form-control" required />
+            <span asp-validation-for="User.ExpDate" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.NameOnCard" class="control-label">Name on Card</label>
-            <input asp-for="User.NameOnCard" class="form-control" />
+            <input asp-for="User.NameOnCard" class="form-control" required />
+            <span asp-validation-for="User.NameOnCard" class="text-danger"></span>
         </div>
         <div class="checkout">
             <label asp-for="User.Svc" class="control-label">SVC</label>
-            <input asp-for="User.Svc" class="form-control" />
+            <input asp-for="User.Svc" class="form-control" required />
+            <span asp-validation-for="User.Svc" class="text-danger"></span>
         </div>
         <br />
         <div>

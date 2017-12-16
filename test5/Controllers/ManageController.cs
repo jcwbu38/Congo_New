@@ -143,6 +143,30 @@ namespace test5.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> ResetPassword()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+            }
+
+            var hasPassword = await _userManager.HasPasswordAsync(user);
+            if (!hasPassword)
+            {
+                return RedirectToAction(nameof(SetPassword));
+            }
+            else
+            {
+                await _userManager.RemovePasswordAsync(user);
+                return RedirectToAction(nameof(SetPassword));
+            }
+
+            var model = new ChangePasswordViewModel { StatusMessage = StatusMessage };
+            return View(model);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> ChangePassword()
         {
             var user = await _userManager.GetUserAsync(User);

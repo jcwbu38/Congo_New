@@ -1,0 +1,11 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using test5.Models.UserViewModels
+@model test5.Models.UserViewModels.LoginViewModel
+@inject SignInManager<User> SignInManager
+<br />
+<br />
+@{
+    <h4> Welcome Back @Model.Email !!!</h4>
+}
+
+<a asp-action="SetRole">OK</a>

@@ -108,6 +108,8 @@ namespace test5.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+
+
                     /*
                     var theUser = await _userManager.Users.FirstAsync(m => m.Email.Equals(model.Email));
                     if ( theUser != null )
@@ -116,7 +118,8 @@ namespace test5.Controllers
                         await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Tests"));
                     }
                     */
-                    return RedirectToLocal(returnUrl);
+                    //return RedirectToLocal(returnUrl);
+                    return View("LoginSuccess", model);
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -136,6 +139,53 @@ namespace test5.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> SetRole(User model)
+        {
+            string userEmail = User.Identities.First(u => u.HasClaim(c => c.Type == ClaimTypes.Name)).FindFirst(ClaimTypes.Name).Value;
+            if (userEmail != null)
+            {
+                var theUser = await _userManager.Users.FirstAsync(m => m.Email.Equals(userEmail));
+
+                if (theUser != null && !String.IsNullOrEmpty(theUser.UserType))
+                {
+                    Claim roleClaim = null;
+                    try
+                    {
+                        roleClaim = User.Identities.First(u => u.HasClaim(c => c.Type == ClaimTypes.Role)).FindFirst(ClaimTypes.Role);
+                    }
+                    catch { }
+                    if (roleClaim != null)
+                    {
+                        if (!roleClaim.Value.Equals(theUser.UserType))
+                        {
+                            User.Identities.Last(u => u.HasClaim(c => c.Type == ClaimTypes.Role)).RemoveClaim(roleClaim);
+                            var newClaim = new Claim(ClaimTypes.Role, theUser.UserType);
+                            await _userManager.AddClaimAsync(theUser, newClaim);
+                            await _signInManager.RefreshSignInAsync(theUser);
+                        }
+
+                    }
+                    else
+                    {
+                        var newClaim = new Claim(ClaimTypes.Role, theUser.UserType);
+                        await _userManager.AddClaimAsync(theUser, newClaim);
+                        await _signInManager.RefreshSignInAsync(theUser);
+                    }
+                }
+                else // Add the "Customer" role to the user.
+                {
+                    var newClaim = new Claim(ClaimTypes.Role, "Customers");
+                    theUser.UserType = "Customers";
+                    await _userManager.UpdateAsync(theUser);
+                    await _userManager.AddClaimAsync(theUser, newClaim);
+                    await _signInManager.RefreshSignInAsync(theUser);
+                }
+            }
+            return RedirectToAction("Index", "Home" );
         }
 
         [HttpGet]
@@ -302,7 +352,7 @@ namespace test5.Controllers
                     User.AddIdentity(userType);
                     */
 
-                    return RedirectToLocal(returnUrl);
+                    return View("RegisterSuccess", model);
                 }
                 AddErrors(result);
             }
@@ -568,6 +618,7 @@ namespace test5.Controllers
         // GET: User/Create
         public IActionResult AdminCreate()
         {
+            
             return View();
         }
 
@@ -581,38 +632,17 @@ namespace test5.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.UserName = user.Email;
                 var result = await _userManager.CreateAsync(user);
                 await _context.SaveChangesAsync();
 
-                var theUser = await _userManager.Users.FirstAsync(u => u.Email.Equals(user.Email));
+                var theUser = await _context.Users.SingleOrDefaultAsync(m => m.Email.Equals(user.Email));
 
                 if (theUser != null)
                 {
-                    if (theUser.UserType == "Administrators")
-                    {
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Role, "Administrators"));
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Administrators"));
-                    }
-                    else if (theUser.UserType == "Logistics")
-                    {
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Role, "Logistics"));
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Logistics"));
-                    }
-                    else if (theUser.UserType == "Sales")
-                    {
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Role, "Sales"));
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Sales"));
-                    }
-                    else if (theUser.UserType == "Tests")
-                    {
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Role, "Tests"));
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Tests"));
-                    }
-                    else
-                    {
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Role, "Customers"));
-                        await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Customers"));
-                    }
+                    await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Role, user.UserType));
+
+                    await _signInManager.RefreshSignInAsync(theUser);
                 }
                 return RedirectToAction(nameof(ListUsers));
             }
@@ -643,6 +673,34 @@ namespace test5.Controllers
             User theUser = await _context.Users.SingleOrDefaultAsync(m => m.Email.Equals(user.Email));
             if (theUser != null)
             {
+
+                IList<Claim> userClaims = null;
+                try
+                {
+                    //roleClaim = User.Identities.First(u => u.HasClaim(c => c.Type == ClaimTypes.Role)).FindFirst(ClaimTypes.Role);
+                    userClaims = await _userManager.GetClaimsAsync(theUser);
+                }
+                catch { }
+                if (userClaims != null)
+                {
+                    foreach (var aClaim in userClaims)
+                    {
+                        if (aClaim.Type.Equals(ClaimTypes.Role) && !aClaim.Value.Equals(theUser.UserType))
+                        {
+                            await _userManager.RemoveClaimAsync(theUser, aClaim);
+                        }
+                    }
+                    var newClaim = new Claim(ClaimTypes.Role, user.UserType);
+                    await _userManager.AddClaimAsync(theUser, newClaim);
+
+                }
+                else
+                {
+                    var newClaim = new Claim(ClaimTypes.Role, user.UserType);
+                    await _userManager.AddClaimAsync(theUser, newClaim);
+                    await _signInManager.RefreshSignInAsync(theUser);
+                }
+
                 theUser.UserType = user.UserType;
                 theUser.First = user.First;
                 theUser.Last = user.Last;
@@ -659,33 +717,9 @@ namespace test5.Controllers
 
                 _context.Update(theUser);
                 await _context.SaveChangesAsync();
-                /*
-                await _userManager.RemoveClaimsAsync(theUser, User.Claims);
-
-                if (theUser.UserType == "Administrators")
-                {
-                    await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Administrators"));
-                }
-                else if (theUser.UserType == "Logistics")
-                {
-                    await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Logistics"));
-                }
-                else if (theUser.UserType == "Sales")
-                {
-                    await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Sales"));
-                }
-                else if (theUser.UserType == "Tests")
-                {
-                    await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Tests"));
-                }
-                else
-                {
-                    await _userManager.AddClaimAsync(theUser, new Claim(ClaimTypes.Name, "Customers"));
-                }
-                */
             }
 
-            return View("AdminEdit");
+            return RedirectToAction(nameof(ListUsers));
 
         }
 
@@ -752,6 +786,12 @@ namespace test5.Controllers
         private bool UserExists(string id)
         {
             return _context.Users.Any(e => e.Email.Equals(id));
+        }
+
+        [Authorize(Roles = "Administrators, Tests")]
+        public IActionResult changePassword()
+        {
+            return RedirectToAction("ResetPassword", "Manage");
         }
 
         #endregion

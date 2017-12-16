@@ -28,7 +28,7 @@
                         <a href="/Home/ProductDetails/@product.itemID">
                             <img src="@product.image" />
                             <p class="prod_desc">
-                                @if (product.EntryDate.Year == DateTime.Today.Year)
+                                @if (product.dateReceived.Year == DateTime.Today.Year)
                                 {
                                     <strong>NEW! </strong>
                                 }

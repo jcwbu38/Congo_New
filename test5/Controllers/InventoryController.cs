@@ -60,7 +60,7 @@ namespace test5.Controllers
         [HttpPost]
         [Authorize(Roles = "Sales, Tests")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice, quantity, EntryDate")] Inventory inventory)
+        public async Task<IActionResult> Create([Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice, quantity")] Inventory inventory)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace test5.Controllers
         [HttpPost]
         [Authorize(Roles = "Sales, Logistics, Tests")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice,quantity, entryDate")] Inventory inventory)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice,quantity")] Inventory inventory)
         {
             if (id != inventory.ID)
             {
