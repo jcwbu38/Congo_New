@@ -8,7 +8,7 @@ namespace test5.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=Inventory.db");
+            optionsBuilder.UseSqlite("Filename=wwwroot\\App_Data\\Inventory.db");
         }
 
 

@@ -8,7 +8,7 @@ namespace test5.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Filename=User.db");
+            optionsBuilder.UseSqlite("Filename=wwwroot\\App_Data\\User.db");
         }
 
         public UserContext()

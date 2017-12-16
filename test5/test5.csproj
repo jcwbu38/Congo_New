@@ -27,4 +27,10 @@
   <ItemGroup>
     <Folder Include="Views\Reporting\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\App_Data\Inventory.db" />
+    <None Include="wwwroot\App_Data\PurchaseOrder.db" />
+    <None Include="wwwroot\App_Data\User.db" />
+  </ItemGroup>
 </Project>
