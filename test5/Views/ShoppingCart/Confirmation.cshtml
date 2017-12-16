@@ -187,7 +187,7 @@
         <input asp-for="User.ExpDate" type="hidden" />
         <input asp-for="User.NameOnCard" type="hidden" />
         <input asp-for="User.Svc" type="hidden" />
-
+        @Html.AntiForgeryToken()
         <br />
         <div>
             <input type="submit" value="Purchase" class="btn btn-primary" />

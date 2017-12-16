@@ -1,4 +1,4 @@
-﻿@using test5.Models;
+﻿@using System.Security.Claims;
 
 @{
     ViewBag.Title = "Shopping Cart";
@@ -60,10 +60,10 @@
             <label class="cartItemQty">Quantity</label>
             <label class="cartItemUpdate">Update</label>
         </div>
-            var count = 0;
-            foreach (var item in Model)
-            {
-                ++count;
+        var count = 0;
+        foreach (var item in Model)
+        {
+            ++count;
             <div class="form-group">
                 <label class="cartItemNum">@count</label>
                 <label class="cartItemDesc">@item.description</label>
@@ -88,9 +88,9 @@
             
             </div>
 
-                totalPrice += item.discountPrice > 0 ? item.discountPrice : item.price;
-                totalQty += item.cartQuantity;
-            }
+            totalPrice += item.discountPrice > 0 ? item.discountPrice : item.price;
+            totalQty += item.cartQuantity;
+        }
         <br />
         <p style="border-top: 1px solid #8c8b8b;" />
         <div style="text-align: center;">
@@ -112,9 +112,32 @@
             <button onclick="applyDiscount();">Apply</button>
         </div>
         <br />
-        <div>
-            <button class="btn btn-primary" onclick="Checkout();">Checkout</button>
-        </div>
+
+        string theRole = null;
+        try
+        {
+            theRole = User.Identities.Last(u => u.HasClaim(c => c.Type == ClaimTypes.Role)).FindFirst(ClaimTypes.Role).Value;
+        }
+        catch (Exception e)
+        { }
+
+        // Only allow the Customer accounts to have access to the checkout button.
+        if ( !String.IsNullOrEmpty(theRole) )
+        {
+            if ( theRole.Equals("Tests") || theRole.Equals("Customers") )
+            {
+                    <div>
+                        <button class="btn btn-primary" onclick="Checkout();">Checkout</button>
+                    </div>
+            }
+        }
+        else if (User.Identity.IsAuthenticated)
+        {
+            <div>
+                <button class="btn btn-primary" onclick="Checkout();">Checkout</button>
+            </div>
+
+        }
     }
     <br style="float: none;"/>
 }

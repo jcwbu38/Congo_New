@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using test5.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace test5.Controllers
 {
@@ -47,6 +48,7 @@ namespace test5.Controllers
         }
 
         // GET: Inventory/Create
+        [Authorize(Roles = "Sales, Tests")]
         public IActionResult Create()
         {
             return View();
@@ -56,6 +58,7 @@ namespace test5.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Sales, Tests")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice, quantity, EntryDate")] Inventory inventory)
         {
@@ -69,6 +72,7 @@ namespace test5.Controllers
         }
 
         // GET: Inventory/Edit/5
+        [Authorize(Roles = "Sales, Logistics, Tests")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,8 +92,9 @@ namespace test5.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Sales, Logistics, Tests")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice,quantity, EntryDate")] Inventory inventory)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,itemID,itemName,dateReceived,locationID,sellerName,image,description,detailedDescription,price,discountPrice,quantity, entryDate")] Inventory inventory)
         {
             if (id != inventory.ID)
             {
@@ -139,6 +144,7 @@ namespace test5.Controllers
 
         // POST: Inventory/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Sales, Tests")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

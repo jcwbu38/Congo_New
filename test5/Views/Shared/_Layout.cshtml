@@ -44,25 +44,15 @@
                         }
                         else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Administrators") )
                         {
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <!-- requirement 3.2.10.3.1 -->
-                            <li>@Html.ActionLink("New Products", "Index", "NewProduct")</li>
-                            <!-- requirement 3.2.10.3.1 -->
-                            <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
-                            <!-- requirement 3.2.11.3.2 -->
-                            <li>@Html.ActionLink("Users", "ListUsers", "User")</li>
+                            <li>@Html.ActionLink("User Management", "ListUsers", "User")</li>
                         }
                         else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Logistics") )
                         {
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <!-- requirement 3.2.10.3.1 -->
-                            <li>@Html.ActionLink("New Products", "Index", "NewProduct")</li>
-                            <!-- requirement 3.2.10.3.1 -->
-                            <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
+                            <li>@Html.ActionLink("PO Management", "Index", "PurchaseOrder")</li>
                             <!-- requirement 3.2.11.3.2 -->
-                            <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
+                            <li>@Html.ActionLink("Inventory Management", "Index", "Inventory")</li>
                         }
-                        else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Sales") )
+                        else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Sales"))
                         {
                             <li>@Html.ActionLink("Home", "Index", "Home")</li>
                             <!-- requirement 3.2.10.3.1 -->
@@ -71,6 +61,8 @@
                             <li>@Html.ActionLink("Clearance", "Index", "Clearance")</li>
                             <!-- requirement 3.2.11.3.2 -->
                             <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
+                            <!-- requirement 3.2.11.3.2 -->
+                            <li>@Html.ActionLink("Cart", "Index", "ShoppingCart")</li>
                         }
                         else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Tests"))
                         {

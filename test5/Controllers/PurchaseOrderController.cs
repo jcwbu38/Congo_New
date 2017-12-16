@@ -156,6 +156,8 @@ namespace test5.Controllers
             return 1;
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         // ShoppingCart/OrderPlaced - this method handles sending the credit card information for payment and creating the PO for the order.
         public async Task<IActionResult> CreatePO(CheckoutViewModel order )
         {
