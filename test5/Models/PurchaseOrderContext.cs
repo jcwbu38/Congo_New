@@ -5,8 +5,20 @@ namespace test5.Models
 {
     public class PurchaseOrderContext : DbContext
     {
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Filename=PurchaseOrder.db");
+        }
+
+
+
         public PurchaseOrderContext(DbContextOptions<PurchaseOrderContext> options)
             : base(options)
+        {
+        }
+
+        public PurchaseOrderContext()
         {
         }
 

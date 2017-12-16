@@ -20,9 +20,23 @@ namespace test5
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            using (var client = new InventoryContext())
+            {
+                client.Database.EnsureCreated();
+            }
+
+            using (var client = new UserContext())
+            {
+                client.Database.EnsureCreated();
+            }
+
+            using (var client = new PurchaseOrderContext())
+            {
+                client.Database.EnsureCreated();
+            }
+
         }
 
         public IConfiguration Configuration { get; }
@@ -58,17 +72,21 @@ namespace test5
                 options.AddPolicy("SalesOnly", policy => policy.RequireRole("Sale"));
             });
 
-            // Add Inventory DB
-            services.AddDbContext<InventoryContext>(options =>
-            options.UseSqlite("Data Source=Inventory.db"));
+            services.AddEntityFrameworkSqlite().AddDbContext<InventoryContext>();
+            services.AddEntityFrameworkSqlite().AddDbContext<UserContext>();
+            services.AddEntityFrameworkSqlite().AddDbContext<PurchaseOrderContext>();
 
-            // Add User DB
-            services.AddDbContext<UserContext>(options =>
-            options.UseSqlite("Data Source=User.db"));
+            //// Add Inventory DB
+            //services.AddDbContext<InventoryContext>(options =>
+            //options.UseSqlite("DefaultConnection"));
 
-            // Add Purchase Order DB
-            services.AddDbContext<PurchaseOrderContext>(options =>
-            options.UseSqlite("Data Source=PurchaseOrder.db"));
+            //// Add User DB
+            //services.AddDbContext<UserContext>(options =>
+            //options.UseSqlite("Data Source=User.db"));
+
+            //// Add Purchase Order DB
+            //services.AddDbContext<PurchaseOrderContext>(options =>
+            //options.UseSqlite("Data Source=PurchaseOrder.db"));
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<UserContext>()

@@ -6,6 +6,11 @@ namespace test5.Models
 {
     public class UserContext : IdentityDbContext<User>
     {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Filename=User.db");
+        }
+
         public UserContext()
         {
         }
