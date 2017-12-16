@@ -55,9 +55,11 @@
         </dd>
     </dl>
     
-    <form asp-action="AdminDelete">
+    <form asp-action="DeleteConfirmed">
         <input type="hidden" asp-for="Email" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="ListUsers">Back to List</a>
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Delete" class="btn btn-default" />
     </form>
+    <a asp-action="ListUsers">Back to List</a>
+    
 </div>
