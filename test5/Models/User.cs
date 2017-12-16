@@ -9,27 +9,20 @@ namespace test5.Models
 
         public  string UserType{ get; set; }
 
-        [Required]
         [StringLength(100)]
         public string First { get; set; }
 
-        [Required]
         [StringLength(100)]
         public string Last { get; set; }
 
-        [Required]
         public string Address1 { get; set; }
 
         public string Address2 { get; set; }
-
-        [Required]
         public string City { get; set; }
 
-        [Required]
         [StringLength(2)]
         public string State { get; set; }
 
-        [Required]
         public int Zip { get; set; }
 
         
