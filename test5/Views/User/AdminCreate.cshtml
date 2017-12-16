@@ -1,4 +1,4 @@
-@model test5.ViewModels.CreateUserViewModel
+@model test5.Models.User
 
 @{
     ViewData["Title"] = "Create";
@@ -6,84 +6,91 @@
 
 <h2>Create New User</h2>
 
-<h2>New Customer</h2>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AdminCreate">
+            
+            <div class="form-group">
+                <label asp-for="UserType" class="control-label"></label>
+                <input asp-for="UserType" class="form-control" />
+                <span asp-validation-for="UserType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="First" class="control-label"></label>
+                <input asp-for="First" class="form-control" />
+                <span asp-validation-for="First" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Last" class="control-label"></label>
+                <input asp-for="Last" class="form-control" />
+                <span asp-validation-for="Last" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address1" class="control-label"></label>
+                <input asp-for="Address1" class="form-control" />
+                <span asp-validation-for="Address1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address2" class="control-label"></label>
+                <input asp-for="Address2" class="form-control" />
+                <span asp-validation-for="Address2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Zip" class="control-label"></label>
+                <input asp-for="Zip" class="form-control" />
+                <span asp-validation-for="Zip" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NameOnCard" class="control-label"></label>
+                <input asp-for="NameOnCard" class="form-control" />
+                <span asp-validation-for="NameOnCard" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CardNumber" class="control-label"></label>
+                <input asp-for="CardNumber" class="form-control" />
+                <span asp-validation-for="CardNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpDate" class="control-label"></label>
+                <input asp-for="ExpDate" class="form-control" />
+                <span asp-validation-for="ExpDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Svc" class="control-label"></label>
+                <input asp-for="Svc" class="form-control" />
+                <span asp-validation-for="Svc" class="text-danger"></span>
+            </div>
 
-@using (Html.BeginForm("Save", "User"))
-{ 
-    @Html.ValidationSummary(true, "Please fix the following errors.")
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.First)
-        @Html.TextBoxFor(m => m.User.First, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.First)
+            <input type="hidden" asp-for="Id" class="form-control" />
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+        </div>
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.Last)
-        @Html.TextBoxFor(m => m.User.Last, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.Last)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.Address1)
-        @Html.TextBoxFor(m => m.User.Address1, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.Address1)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.Address2)
-        @Html.TextBoxFor(m => m.User.Address2, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.Address2)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.State)
-        @Html.TextBoxFor(m => m.User.State, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.State)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.Zip)
-        @Html.TextBoxFor(m => m.User.Zip, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.Zip)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.Phone)
-        @Html.TextBoxFor(m => m.User.Phone, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.Phone)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.Email)
-        @Html.TextBoxFor(m => m.User.Email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.Email)
-    </div>
+        <div>
+            <a asp-action="ListUsers">Back to List</a>
+        </div>
 
-    <h4>Payment Options</h4>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.CardNumber)
-        @Html.TextBoxFor(m => m.User.CardNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.CardNumber)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.ExpDate)
-        @Html.TextBoxFor(m => m.User.ExpDate, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.ExpDate)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.NameOnCard)
-        @Html.TextBoxFor(m => m.User.NameOnCard, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.NameOnCard)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.User.Svc)
-        @Html.TextBoxFor(m => m.User.Svc, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.User.Svc)
-    </div>
-
-
-    @Html.HiddenFor(m => m.User.Id)
-    @Html.AntiForgeryToken()
-    <button type="submit" class="btn btn-primary">Save</button>
-}
-
-<div>
-    <a asp-action="ListUsers">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        @section Scripts {
+            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+        }

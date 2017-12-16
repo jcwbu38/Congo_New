@@ -53,9 +53,9 @@ namespace test5
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdministratorsOnly", policy => policy.RequireRole("Administrator"));
-                options.AddPolicy("LogisticsOnly", policy => policy.RequireRole("Logistic"));
-                options.AddPolicy("SalesOnly", policy => policy.RequireRole("Sale"));
+                options.AddPolicy("AdministratorsOnly", policy => policy.RequireRole("Administrators"));
+                options.AddPolicy("LogisticsOnly", policy => policy.RequireRole("Logistics"));
+                options.AddPolicy("SalesOnly", policy => policy.RequireRole("Sales"));
             });
 
             // Add Inventory DB
