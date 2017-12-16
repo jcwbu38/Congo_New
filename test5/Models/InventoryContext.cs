@@ -5,8 +5,19 @@ namespace test5.Models
 {
     public class InventoryContext : DbContext
     {
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Filename=Inventory.db");
+        }
+
+
         public InventoryContext(DbContextOptions<InventoryContext> options)
             : base(options)
+        {
+        }
+
+        public InventoryContext()
         {
         }
 
