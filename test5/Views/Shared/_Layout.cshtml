@@ -45,12 +45,16 @@
                         else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Administrators") )
                         {
                             <li>@Html.ActionLink("User Management", "ListUsers", "User")</li>
+                            <!-- requirement 3.2.11.3.2 -->
+                            <li>@Html.ActionLink("Reports", "Index", "Reporting")</li>
                         }
-                        else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Logistics") )
+                        else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Logistics"))
                         {
                             <li>@Html.ActionLink("PO Management", "Index", "PurchaseOrder")</li>
                             <!-- requirement 3.2.11.3.2 -->
                             <li>@Html.ActionLink("Inventory Management", "Index", "Inventory")</li>
+                            <!-- requirement 3.2.11.3.2 -->
+                            <li>@Html.ActionLink("Reports", "Index", "Reporting")</li>
                         }
                         else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Sales"))
                         {
@@ -75,6 +79,8 @@
                             <li>@Html.ActionLink("Inventory", "Index", "Inventory")</li>
                             <li>@Html.ActionLink("PO", "Index", "PurchaseOrder")</li>
                             <li>@Html.ActionLink("Users", "ListUsers", "User")</li>
+                            <!-- requirement 3.2.11.3.2 -->
+                            <li>@Html.ActionLink("Reports", "Index", "Reporting")</li>
                         }
                         else if (!String.IsNullOrEmpty(theRole) && theRole.Equals("Customers"))
                         {

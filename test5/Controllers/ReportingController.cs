@@ -33,8 +33,8 @@ namespace test5.Controllers
                          select m;
 
             // Select purchase orders that have not been shipped
-            var outstandingPO = purchaseOrders.Where(s => s.shipDate.Date > DateTime.Now.Date);
-            var shippedPO = purchaseOrders.Where(s => s.shipDate.Date < DateTime.Now.Date);
+            var outstandingPO = purchaseOrders.Where(s => s.shipDate.Year == 1);
+            var shippedPO = purchaseOrders.Where(s => ( s.shipDate.Year > 1 && s.shipDate.Date < DateTime.Now.Date));
             var shippingTodayPO = purchaseOrders.Where(s => s.shipDate.Date == DateTime.Now.Date);
 
             var reportingVM = new ReportingViewModel();
